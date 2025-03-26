@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TimerController timerController;
     [SerializeField] private HighScoreManager highScoreManager;
 
+    [SerializeField] private RetryButton RetryButton;
+
     void Start()
     {
         //タイマースタート
@@ -38,6 +40,9 @@ public class GameManager : MonoBehaviour
 
         // 3. 画面スクロール演出
         yield return StartCoroutine(Scroll());
+
+        //ボタンを表示
+        RetryButton.EnableButton();
 
         // 4. クリアタイム表示
         yield return StartCoroutine(ClearTime());
