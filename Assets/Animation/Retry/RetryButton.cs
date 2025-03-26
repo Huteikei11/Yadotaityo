@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class RetryButton : MonoBehaviour
 {
@@ -44,6 +45,7 @@ public class RetryButton : MonoBehaviour
         if (eventTrigger.enabled)
         {
             animator.SetBool("isHovered", false);
+            Invoke("RetryAction", 1.5f); 
         }
     }
 
@@ -54,5 +56,11 @@ public class RetryButton : MonoBehaviour
         {
             animator.SetTrigger("isClicked");
         }
+    }
+
+    //リトライボタンの中身
+    private void RetryAction()
+    {
+        SceneManager.LoadScene("Title");
     }
 }
