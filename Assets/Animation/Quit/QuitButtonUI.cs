@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class RetryButton : MonoBehaviour
+public class QuitButtonUI : MonoBehaviour
 {
     private Animator animator;
     private EventTrigger eventTrigger;
@@ -61,6 +61,10 @@ public class RetryButton : MonoBehaviour
     //リトライボタンの中身
     private void Action()
     {
-        SceneManager.LoadScene("Title");
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
+#else
+    Application.Quit();//ゲームプレイ終了
+#endif
     }
 }
