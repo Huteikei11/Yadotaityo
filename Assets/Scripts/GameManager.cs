@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private HighScoreManager highScoreManager;
 
     [SerializeField] private RetryButton RetryButton;
+    [SerializeField] private ExitButtonUI exitButtonUI;
 
     void Start()
     {
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour
 
         //ボタンを表示
         RetryButton.EnableButton();
+        exitButtonUI.EnableButton();
 
         // 4. クリアタイム表示
         yield return StartCoroutine(ClearTime());
