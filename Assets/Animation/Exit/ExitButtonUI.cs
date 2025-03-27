@@ -61,10 +61,6 @@ public class ExitButtonUI : MonoBehaviour
     //リトライボタンの中身
     private void Action()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
-#else
-    Application.Quit();//ゲームプレイ終了
-#endif
+        SceneManager.LoadScene("Main");
     }
 }

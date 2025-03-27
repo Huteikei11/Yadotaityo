@@ -61,6 +61,6 @@ public class RetryButton : MonoBehaviour
     //リトライボタンの中身
     private void Action()
     {
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadScene("Main");
     }
 }
