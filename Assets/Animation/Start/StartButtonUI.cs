@@ -2,20 +2,25 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class ExitButtonUI : MonoBehaviour
+public class StartButtonUI : MonoBehaviour
 {
     private Animator animator;
     private EventTrigger eventTrigger;
     private SpriteRenderer spriteRenderer; // スプライトを非表示にする用
 
-    [SerializeField] private RetryButton RetryButton;
+    [SerializeField] private OkuuButtonUI okuuButtonUI;
+    [SerializeField] private OrinButtonUI orinButtonUI;
+    [SerializeField] private SatoriButtonUI satoriButtonUI;
+
+    [SerializeField] private OptionButtonUI optionButtonUI;
+    [SerializeField] private QuitButtonUI quitButtonUI;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         eventTrigger = GetComponent<EventTrigger>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        DisableButton();
+        EnableButton();
     }
 
     // ボタンを有効にする
@@ -62,16 +67,20 @@ public class ExitButtonUI : MonoBehaviour
         }
     }
 
-    //リトライボタンの中身
+    //ボタンの中身
     private void Action()
     {
-        SceneManager.LoadScene("Title");
+        okuuButtonUI.EnableButton();
+        orinButtonUI.EnableButton();
+        satoriButtonUI.EnableButton();
     }
 
     private void CloseButton()
     {
-        RetryButton.OnMove();
+        optionButtonUI.OnMove();
+        quitButtonUI.OnMove();
     }
+
     public void OnMove()
     {
         animator.SetTrigger("isMoved");

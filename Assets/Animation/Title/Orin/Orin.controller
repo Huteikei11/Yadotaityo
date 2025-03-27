@@ -19,7 +19,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0.014511585
   m_TransitionOffset: 0
-  m_ExitTime: 0.8543352
+  m_ExitTime: 0.8856204
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -42,9 +42,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.0045286976
+  m_TransitionDuration: 0.0030389018
   m_TransitionOffset: 0
-  m_ExitTime: 0.9489439
+  m_ExitTime: 0.9741025
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -98,9 +98,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.011203036
+  m_TransitionDuration: 0.010729715
   m_TransitionOffset: 0
-  m_ExitTime: 0.95081156
+  m_ExitTime: 0.9569748
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -126,7 +126,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 78b9ca9a80aedce4a85ca65e0bf72c15, type: 2}
+  m_Motion: {fileID: 7400000, guid: 509d2afc6c391d04da4444e0907dc46c, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -154,7 +154,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 79b178f41c65303439f67b112ce0acfd, type: 2}
+  m_Motion: {fileID: 7400000, guid: a3a10e2a3d363bb479e5de5ec2e768f3, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -182,7 +182,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 8101068a329a1d744bbdc21a7e243d6c, type: 2}
+  m_Motion: {fileID: 7400000, guid: 56f1844f1d7b8e445afb4a2b2ba0b195, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -194,7 +194,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Quit
+  m_Name: Orin
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: isHovered
@@ -245,9 +245,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.0040893853
+  m_TransitionDuration: 0.0014889985
   m_TransitionOffset: 0
-  m_ExitTime: 0.98943925
+  m_ExitTime: 0.9832557
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -273,7 +273,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: aa1539b19366d2f4faaf253915d16d29, type: 2}
+  m_Motion: {fileID: 7400000, guid: f8919b72063b61a4db38ca03c3e6b2d3, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

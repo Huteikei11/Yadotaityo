@@ -19,17 +19,21 @@ public class GameManager : MonoBehaviour
     [SerializeField] private RetryButton RetryButton;
     [SerializeField] private ExitButtonUI exitButtonUI;
 
+    private int difficulty;
+
     void Start()
     {
         //タイマースタート
         timerController.StartTimer();
+        difficulty = DifficultyManager.Instance != null ? DifficultyManager.Instance.GetDifficulty() : 0;
     }
     public void FinishGame()
     {
-        timerController.StopTimerAndSave();
-        highScoreManager.UpdateScoreDisplay();
+        timerController.StopTimerAndSave(difficulty);
+        highScoreManager.UpdateScoreDisplay(difficulty);
         StartCoroutine(ResultSequence());
     }
+
 
     private IEnumerator ResultSequence()
     {

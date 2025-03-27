@@ -2,20 +2,18 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class ExitButtonUI : MonoBehaviour
+public class OptionButtonUI : MonoBehaviour
 {
     private Animator animator;
     private EventTrigger eventTrigger;
     private SpriteRenderer spriteRenderer; // スプライトを非表示にする用
-
-    [SerializeField] private RetryButton RetryButton;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         eventTrigger = GetComponent<EventTrigger>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        DisableButton();
+        EnableButton();
     }
 
     // ボタンを有効にする
@@ -56,8 +54,6 @@ public class ExitButtonUI : MonoBehaviour
         if (eventTrigger.enabled)
         {
             animator.SetTrigger("isClicked");
-            CloseButton();
-
             Invoke("Action", 1.5f);
         }
     }
@@ -65,13 +61,13 @@ public class ExitButtonUI : MonoBehaviour
     //リトライボタンの中身
     private void Action()
     {
-        SceneManager.LoadScene("Title");
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
+#else
+    Application.Quit();//ゲームプレイ終了
+#endif
     }
 
-    private void CloseButton()
-    {
-        RetryButton.OnMove();
-    }
     public void OnMove()
     {
         animator.SetTrigger("isMoved");

@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -8,12 +9,15 @@ public class QuitButtonUI : MonoBehaviour
     private EventTrigger eventTrigger;
     private SpriteRenderer spriteRenderer; // スプライトを非表示にする用
 
+    [SerializeField] private StartButtonUI startButtonUI;
+    [SerializeField] private OptionButtonUI optionButtonUI;
+
     void Start()
     {
         animator = GetComponent<Animator>();
         eventTrigger = GetComponent<EventTrigger>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        DisableButton();
+        EnableButton();
     }
 
     // ボタンを有効にする
@@ -54,6 +58,8 @@ public class QuitButtonUI : MonoBehaviour
         if (eventTrigger.enabled)
         {
             animator.SetTrigger("isClicked");
+            CloseButton();
+
             Invoke("Action", 1.5f);
         }
     }
@@ -66,5 +72,16 @@ public class QuitButtonUI : MonoBehaviour
 #else
     Application.Quit();//ゲームプレイ終了
 #endif
+    }
+
+    public void OnMove()
+    {
+        animator.SetTrigger("isMoved");
+    }
+
+    private void CloseButton()
+    {
+        optionButtonUI.OnMove();
+        startButtonUI.OnMove();
     }
 }

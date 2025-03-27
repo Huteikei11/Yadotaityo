@@ -8,6 +8,8 @@ public class RetryButton : MonoBehaviour
     private EventTrigger eventTrigger;
     private SpriteRenderer spriteRenderer; // スプライトを非表示にする用
 
+    [SerializeField] private ExitButtonUI exitButtonUI;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -54,6 +56,8 @@ public class RetryButton : MonoBehaviour
         if (eventTrigger.enabled)
         {
             animator.SetTrigger("isClicked");
+            CloseButton();
+
             Invoke("Action", 1.5f);
         }
     }
@@ -62,5 +66,14 @@ public class RetryButton : MonoBehaviour
     private void Action()
     {
         SceneManager.LoadScene("Main");
+    }
+
+    private void CloseButton()
+    {
+        exitButtonUI.OnMove();
+    }
+    public void OnMove()
+    {
+        animator.SetTrigger("isMoved");
     }
 }
