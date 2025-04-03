@@ -5,6 +5,7 @@ using UnityEngine;
 public class EcstasyManager : MonoBehaviour
 {
     public float ecstacyGage;
+    [SerializeField] private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -106,5 +107,6 @@ public class EcstasyManager : MonoBehaviour
     private void Ecstasy()//Ë¸‚Ì‰‰o
     {
         Debug.Log("Ë¸!");
+        gameManager.FinishGame();
     }
 }
