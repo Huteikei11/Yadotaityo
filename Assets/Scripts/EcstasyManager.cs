@@ -6,6 +6,7 @@ public class EcstasyManager : MonoBehaviour
 {
     public float ecstacyGage;
     [SerializeField] private GameManager gameManager;
+    private bool isEcstasy = false;
 
     // Start is called before the first frame update
     void Start()
@@ -97,11 +98,15 @@ public class EcstasyManager : MonoBehaviour
     }
     public void AddEcstacy(float delta) 
     {
-        ecstacyGage = Mathf.Clamp(ecstacyGage + delta, 0, 100);
-        //Debug.Log($"射精ゲージ{ecstacyGage}");
-        if(ecstacyGage >= 100)//射精するか判定
+        if (!isEcstasy)//射精していたら100のまま
         {
-            Ecstasy();
+            ecstacyGage = Mathf.Clamp(ecstacyGage + delta, 0, 100);
+            //Debug.Log($"射精ゲージ{ecstacyGage}");
+            if (ecstacyGage >= 100)//射精するか判定
+            {
+                isEcstasy = true;
+                Ecstasy();
+            }
         }
     }
     private void Ecstasy()//射精の演出
