@@ -31,7 +31,7 @@ public class DifficultyManager : MonoBehaviour
     //int difficulty = DifficultyManager.Instance.GetDifficulty();
     public int GetDifficulty()
     {
-        return selectedDifficulty;
+        return Instance != null ? Instance.selectedDifficulty : 0;
     }
 
     // 難易度を設定し、ゲームシーンへ移動

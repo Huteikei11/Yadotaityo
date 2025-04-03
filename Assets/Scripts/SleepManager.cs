@@ -11,10 +11,12 @@ public class SleepManager : MonoBehaviour
     public int facePattern;
     public OppaiManager oppaiManager;
     private Coroutine faceCoroutine;
+    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
-        who = oppaiManager.GetChara();//キャラが誰かを取得
+        who = DifficultyManager.Instance != null ? DifficultyManager.Instance.GetDifficulty() : 0;
+        anim.SetInteger("difficult", who);
         StartFace();
     }
 
@@ -54,6 +56,7 @@ public class SleepManager : MonoBehaviour
             if (newFacePattern != facePattern)
             {
                 facePattern = newFacePattern;
+                anim.SetInteger("face", facePattern);
                 Debug.Log($"SleepDeep: {sleepDeep}, Wakeup: {wakeup}, New FacePattern: {facePattern}");
             }
 
@@ -161,6 +164,8 @@ public class SleepManager : MonoBehaviour
     {
         Debug.Log("おきた");
         sleepDeep = 0;
+        anim.SetTrigger("up");
+        
     }
 
     private void AddSleepDeep(float value)//直接睡眠度を足し起きるか判定

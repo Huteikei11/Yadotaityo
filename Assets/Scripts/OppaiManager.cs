@@ -10,7 +10,13 @@ public class OppaiManager : MonoBehaviour
     public int whoChara; //キャラクターが誰なのか
     [SerializeField] private SleepManager sleepManager;
     [SerializeField] private EcstasyManager ecstasyManager;
+    public Animator anim;
 
+    private void Start()
+    {
+        whoChara = DifficultyManager.Instance != null ? DifficultyManager.Instance.GetDifficulty() : 0;
+        anim.SetInteger("difficult",whoChara);
+    }
     void Update()
     {
         if (isTouch)
@@ -23,6 +29,7 @@ public class OppaiManager : MonoBehaviour
             if (Input.GetMouseButtonDown(1))//右クリック
             {
                 animePattern = ChangeAnimation(animePattern);//アニメのpatternを変える処理
+                anim.SetInteger("animePattern", animePattern);
             }
 
             if (Input.GetMouseButton(0))
@@ -69,6 +76,7 @@ public class OppaiManager : MonoBehaviour
 
     void OnHoldStart()
     {
+        anim.SetTrigger("Start");
         Debug.Log("長押し開始");
     }
 
@@ -81,6 +89,7 @@ public class OppaiManager : MonoBehaviour
 
     void OnHoldEnd()
     {
+        anim.SetTrigger("Close");
         Debug.Log("長押し終了");
     }
 
@@ -101,7 +110,7 @@ public class OppaiManager : MonoBehaviour
 
     private int ChangeAnimation(int pattern)
     {
-        int nextpattern = (pattern + 1) % 5;
+        int nextpattern = (pattern + 1) % 4;
         Debug.Log($"アニメパターン{nextpattern}");
         return nextpattern;
     }
