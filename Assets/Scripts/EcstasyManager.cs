@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,12 +7,8 @@ public class EcstasyManager : MonoBehaviour
     public float ecstacyGage;
     [SerializeField] private GameManager gameManager;
     private bool isEcstasy = false;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private OzyamaFall OzyamaFall;
+    public bool isAllowCal;
 
     // Update is called once per frame
     void Update()
@@ -24,7 +20,7 @@ public class EcstasyManager : MonoBehaviour
         float addpoint = 0;
         switch (who)
         {
-            case 0://‚¨‹ó‚¿‚á‚ñ
+            case 0://ãŠç©ºã¡ã‚ƒã‚“
                 switch (pattern)
                 {
                     case 0:
@@ -43,11 +39,12 @@ public class EcstasyManager : MonoBehaviour
                         break;
                     case 4:
                         addpoint += 0.01f;
+                        addpoint += 60.01f;
                         break;
                 }
                 break;
 
-            case 1://‚¨‚è‚ñ‚¿‚á‚ñ
+            case 1://ãŠã‚Šã‚“ã¡ã‚ƒã‚“
                 switch (who)
                 {
                     case 0:
@@ -70,7 +67,7 @@ public class EcstasyManager : MonoBehaviour
                 }
                 break;
 
-            case 2://‚³‚Æ‚è‚¿‚á‚ñ
+            case 2://ã•ã¨ã‚Šã¡ã‚ƒã‚“
                 switch (who)
                 {
                     case 0:
@@ -94,24 +91,28 @@ public class EcstasyManager : MonoBehaviour
                 break;
 
         }
-        AddEcstacy(addpoint);
+        if (isAllowCal)
+        {
+           AddEcstacy(addpoint);
+        }
     }
     public void AddEcstacy(float delta) 
     {
-        if (!isEcstasy)//Ë¸‚µ‚Ä‚¢‚½‚ç100‚Ì‚Ü‚Ü
+        if (!isEcstasy)//å°„ç²¾ã—ã¦ã„ãŸã‚‰100ã®ã¾ã¾
         {
             ecstacyGage = Mathf.Clamp(ecstacyGage + delta, 0, 100);
-            //Debug.Log($"Ë¸ƒQ[ƒW{ecstacyGage}");
-            if (ecstacyGage >= 100)//Ë¸‚·‚é‚©”»’è
+            //Debug.Log($"å°„ç²¾ã‚²ãƒ¼ã‚¸{ecstacyGage}");
+            if (ecstacyGage >= 100)//å°„ç²¾ã™ã‚‹ã‹åˆ¤å®š
             {
                 isEcstasy = true;
                 Ecstasy();
             }
         }
     }
-    private void Ecstasy()//Ë¸‚Ì‰‰o
+    private void Ecstasy()//å°„ç²¾ã®æ¼”å‡º
     {
-        Debug.Log("Ë¸!");
+        OzyamaFall.isAllow = false;
+        Debug.Log("å°„ç²¾!");
         gameManager.FinishGame();
     }
 }

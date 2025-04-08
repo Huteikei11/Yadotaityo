@@ -16,6 +16,9 @@ public class OzyamaFall : MonoBehaviour
     private Vector3[] initPositions;
     private Tweener[] punchTweeners;
     public Animator oppai;
+    [SerializeField] EcstasyManager EcstasyManager;
+
+    public bool isAllow = true;
     // Start is called before the first frame update
 
     void Awake()
@@ -53,7 +56,10 @@ public class OzyamaFall : MonoBehaviour
 
         if (Random.value > 0.4f) // 確率で実行(Radom.Valueは0~1.0)
         {
-            FallObject();
+            if (isAllow)
+            {
+                FallObject();
+            }
         }
         ScheduleNextNoise(); // 次のノイズスケジュールを設定
     }
@@ -114,8 +120,10 @@ public class OzyamaFall : MonoBehaviour
 
     IEnumerator Surprised()
     {
+        EcstasyManager.isAllowCal = false;
         yield return new WaitForSeconds(4f);
         oppai.speed = 1f;
+        EcstasyManager.isAllowCal = true;
     }
 
     /// <summary>

@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private RetryButton RetryButton;
     [SerializeField] private ExitButtonUI exitButtonUI;
 
+    [SerializeField] private Sprite[] semensprites; // スプライトを0,1,2の順に入れておく
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
     private int difficulty;
 
     void Start()
@@ -28,6 +31,7 @@ public class GameManager : MonoBehaviour
         //タイマースタート
         timerController.StartTimer();
         difficulty = DifficultyManager.Instance != null ? DifficultyManager.Instance.GetDifficulty() : 0;
+        spriteRenderer.enabled = false; // 最初は非表示
     }
     public void FinishGame()
     {
@@ -58,7 +62,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator FinishDirection()
     {
-        yield return new WaitForSeconds(2f); // アニメーションの待機時間
+        //yield return new WaitForSeconds(2f); // アニメーションの待機時間
 
 
         // ホワイトアウト開始
@@ -68,24 +72,37 @@ public class GameManager : MonoBehaviour
             whiteScreen.color = new Color(1, 1, 1, t);
             yield return null;
         }
-        yield return new WaitForSeconds(1f); // アニメーションの待機時間
+        mune.SetTrigger("Finish");//胸を止める
 
-        // カットインアニメーションを再生
-        cutInAnimator.SetTrigger("Show");
-
-        yield return new WaitForSeconds(3f); // アニメーションの待機時間
-
-        //胸にかける
-        mune.SetTrigger("Finish");
-        
         // ホワイトイン開始（画面を白からフェードアウト）
-        for (float t = 1f; t > 0; t -= Time.deltaTime*2)
+        for (float t = 1f; t > 0; t -= Time.deltaTime * 2)
         {
             whiteScreen.color = new Color(1, 1, 1, t);
-            KoishiCutIn.color = whiteScreen.color;
             yield return null;
         }
+        // カットインアニメーションを再生
+        cutInAnimator.SetTrigger("Show");
+        yield return new WaitForSeconds(2f); // アニメーションの待機時間
+
+
+        for (float t = 0; t < 1f; t += Time.deltaTime * 3)
+        {
+            whiteScreen.color = new Color(1, 1, 1, t);
+            yield return null;
+        }
+
+        ShowSprite(difficulty);//精液がかかっている
         cutInAnimator.SetTrigger("End");
+        // ホワイトイン開始（画面を白からフェードアウト）
+        for (float t = 1f; t > 0; t -= Time.deltaTime * 2)
+        {
+            whiteScreen.color = new Color(1, 1, 1, t);
+            //KoishiCutIn.color = whiteScreen.color;
+            yield return null;
+        }
+
+
+        
         whiteScreen.gameObject.SetActive(false);
         yield return new WaitForSeconds(1f); // アニメーションの待機時間
     }
@@ -165,6 +182,19 @@ public class GameManager : MonoBehaviour
         {
             clearTimeText.text += c;
             yield return new WaitForSeconds(0.1f); // 文字の表示間隔
+        }
+    }
+
+    public void ShowSprite(int mode)
+    {
+        if (mode >= 0 && mode < semensprites.Length)
+        {
+            spriteRenderer.sprite = semensprites[mode];
+            spriteRenderer.enabled = true; // 表示
+        }
+        else
+        {
+            Debug.LogWarning("不正なモード番号です: " + mode);
         }
     }
 }
