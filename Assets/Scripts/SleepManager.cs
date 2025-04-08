@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SleepManager : MonoBehaviour
 {
@@ -12,6 +13,12 @@ public class SleepManager : MonoBehaviour
     public OppaiManager oppaiManager;
     private Coroutine faceCoroutine;
     public Animator anim;
+    public Animator oppai;
+
+    [SerializeField] private Image whiteScreen; // ホワイトアウト・ホワイトイン用のイメージ
+    [SerializeField] private RetryButton RetryButton;
+    [SerializeField] private ExitButtonUI exitButtonUI;
+    [SerializeField] private OzyamaFall OzyamaFall;
     // Start is called before the first frame update
     void Start()
     {
@@ -162,10 +169,72 @@ public class SleepManager : MonoBehaviour
 
     public void WakeUpChara()//キャラクターが起きる時の処理
     {
-        Debug.Log("おきた");
+        OzyamaFall.isAllow = false;
+                Debug.Log("おきた");
         sleepDeep = 0;
-        anim.SetTrigger("up");
+        StartCoroutine(WatchBool());
+
         
+        
+    }
+
+    IEnumerator WatchBool()
+    {
+        anim.SetTrigger("up");
+        // まず待つ
+        yield return new WaitForSeconds(1f);
+
+        Debug.Log("監視開始");
+
+        bool becameTrue = false;
+
+        if (oppaiManager.isHolding)
+        {
+            becameTrue = true;
+        }
+
+
+        if (!becameTrue)
+        {
+            Debug.Log("1秒間、targetBoolは一度もtrueになりませんでした！");
+            //また寝る
+            OzyamaFall.isAllow = true;
+            anim.SetTrigger("Sleep");
+        }
+        else
+        {
+            Debug.Log("1秒間のうちにtargetBoolがtrueになりました！");
+            StartCoroutine(Failed());
+        }
+
+
+    }
+
+    IEnumerator Failed()
+    {
+        oppai.speed = 0f;
+        yield return new WaitForSeconds(4f);
+
+
+        //明るくする
+        whiteScreen.color = new Color(1, 1, 1, 22/255f);
+        yield return new WaitForSeconds(0.2f);
+        whiteScreen.color = new Color(0, 0, 0, 100/255f);
+        yield return new WaitForSeconds(1f);
+
+        // ホワイトアウト開始
+        for (float t = 0; t < 22/255f; t += Time.deltaTime/5)
+        {
+            whiteScreen.color = new Color(1, 1, 1, t);
+            yield return null;
+        }
+
+        //ゲームオーバー画面表示
+        yield return new WaitForSeconds(3f);
+
+        //ボタンを表示
+        RetryButton.EnableButton();
+        exitButtonUI.EnableButton();
     }
 
     private void AddSleepDeep(float value)//直接睡眠度を足し起きるか判定

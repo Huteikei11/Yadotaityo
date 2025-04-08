@@ -46,7 +46,7 @@ public class OzyamaFall : MonoBehaviour
     //ノイズを加える時間
     private void ScheduleNextNoise()
     {
-        float nextTime = Random.Range(5f, 7f); // 1〜5秒のランダムな時間を設定
+        float nextTime = Random.Range(5f, 10f); // 1〜5秒のランダムな時間を設定
         Invoke("CheckAndExecuteNoise", nextTime);
     }
 
@@ -69,7 +69,7 @@ public class OzyamaFall : MonoBehaviour
         //キャラを選択
         ozyamaChara = GetRandomChoice(50);
         //モーションを選択
-        motion = GetRandomChoice(100);
+        motion = GetRandomChoice(50);
         anim.SetInteger("Chara", ozyamaChara);
         anim.SetInteger("Motion", motion);
         anim.SetTrigger("Entry");

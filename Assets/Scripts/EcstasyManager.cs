@@ -39,7 +39,6 @@ public class EcstasyManager : MonoBehaviour
                         break;
                     case 4:
                         addpoint += 0.01f;
-                        addpoint += 60.01f;
                         break;
                 }
                 break;
