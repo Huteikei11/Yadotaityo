@@ -2208,6 +2208,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 695366419}
+  oppaiManager: {fileID: 711218557}
+  targets:
+  - {fileID: 711218558}
+  - {fileID: 193666019}
+  oppai: {fileID: 1935857546}
 --- !u!4 &695366418
 Transform:
   m_ObjectHideFlags: 0
