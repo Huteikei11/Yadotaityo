@@ -15,12 +15,17 @@ public class SatoriButtonUI : MonoBehaviour
         animator = GetComponent<Animator>();
         eventTrigger = GetComponent<EventTrigger>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        eventTrigger.enabled = false;
+        spriteRenderer.enabled = false;
     }
+
 
     // ボタンを有効にする
     public void EnableButton()
     {
         if (eventTrigger != null) eventTrigger.enabled = true;
+        if (animator != null) animator.SetTrigger("Open");
         if (spriteRenderer != null) spriteRenderer.enabled = true; // スプライトを表示
     }
 

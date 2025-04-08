@@ -122,6 +122,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!95 &190795912 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1160356261127867848, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+  m_PrefabInstance: {fileID: 421093818}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &219867170
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -510,6 +515,8 @@ MonoBehaviour:
   satoriButtonUI: {fileID: 766547127}
   optionButtonUI: {fileID: 1120459162}
   quitButtonUI: {fileID: 219867174}
+  Koishi: {fileID: 1257942227}
+  Titlelogo: {fileID: 190795912}
 --- !u!61 &298797092
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -570,7 +577,7 @@ PrefabInstance:
     - target: {fileID: 1160356261127867848, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 86289baff56ccc948847cbfa1a09cc68, type: 2}
+      objectReference: {fileID: 9100000, guid: 8bb01830d8b409b45966fc9cad02911d, type: 2}
     - target: {fileID: 3626916397498700004, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -858,7 +865,7 @@ PrefabInstance:
     - target: {fileID: 1160356261127867848, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: ba7d2f3fae25580489474ad750c9ce8d, type: 2}
+      objectReference: {fileID: 9100000, guid: 650640bc101bf4a4e8710f75925b99e2, type: 2}
     - target: {fileID: 3626916397498700004, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -1125,6 +1132,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 328e74ad0f1919d4a8e891b9656ba471, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1257942227 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1160356261127867848, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+  m_PrefabInstance: {fileID: 1088640773}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1333002977 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2253911629886400664, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
@@ -1382,11 +1394,11 @@ PrefabInstance:
     - target: {fileID: 1160356261127867848, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: a4427c39e0c79dc43a74c834821960c7, type: 2}
+      objectReference: {fileID: 9100000, guid: 68919b01f3af4f24fa10c9d943848ab7, type: 2}
     - target: {fileID: 3626916397498700004, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 4285554624420050918, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 3626916397498700004, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1394,6 +1406,10 @@ PrefabInstance:
     - target: {fileID: 3626916397498700004, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
       propertyPath: m_SortingOrder
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626916397498700004, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1597,7 +1613,7 @@ PrefabInstance:
     - target: {fileID: 1160356261127867848, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 7f3bf8e5de2938b40853b537a967a511, type: 2}
+      objectReference: {fileID: 9100000, guid: f2d4c99d3a12ec047828f4783e7c2226, type: 2}
     - target: {fileID: 3626916397498700004, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -1847,12 +1863,12 @@ SceneRoots:
   m_Roots:
   - {fileID: 1352608050}
   - {fileID: 1762302660}
+  - {fileID: 421093818}
+  - {fileID: 1088640773}
   - {fileID: 500721584}
   - {fileID: 1120459158}
   - {fileID: 219867170}
   - {fileID: 1694035422}
-  - {fileID: 1088640773}
-  - {fileID: 421093818}
   - {fileID: 1382041990}
   - {fileID: 248744668}
   - {fileID: 1690471465}

@@ -14,6 +14,8 @@ public class StartButtonUI : MonoBehaviour
 
     [SerializeField] private OptionButtonUI optionButtonUI;
     [SerializeField] private QuitButtonUI quitButtonUI;
+    [SerializeField] private Animator Koishi;
+    [SerializeField] private Animator Titlelogo;
 
     void Start()
     {
@@ -21,6 +23,7 @@ public class StartButtonUI : MonoBehaviour
         eventTrigger = GetComponent<EventTrigger>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         EnableButton();
+
     }
 
     // ƒ{ƒ^ƒ“‚ð—LŒø‚É‚·‚é
@@ -60,6 +63,8 @@ public class StartButtonUI : MonoBehaviour
     {
         if (eventTrigger.enabled)
         {
+            Koishi.SetTrigger("Open");
+            Titlelogo.SetTrigger("Move");
             animator.SetTrigger("isClicked");
             CloseButton();
 
