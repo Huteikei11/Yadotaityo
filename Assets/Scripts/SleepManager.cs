@@ -14,6 +14,7 @@ public class SleepManager : MonoBehaviour
     private Coroutine faceCoroutine;
     public Animator anim;
     public Animator oppai;
+    public Animator gameover;
 
     [SerializeField] private Image whiteScreen; // ホワイトアウト・ホワイトイン用のイメージ
     [SerializeField] private RetryButton RetryButton;
@@ -212,7 +213,7 @@ public class SleepManager : MonoBehaviour
 
     IEnumerator Failed()
     {
-        oppai.speed = 0f;
+        //oppai.speed = 0f;
         yield return new WaitForSeconds(4f);
 
 
@@ -231,6 +232,7 @@ public class SleepManager : MonoBehaviour
 
         //ゲームオーバー画面表示
         yield return new WaitForSeconds(3f);
+        gameover.SetTrigger("Failed");
 
         //ボタンを表示
         RetryButton.EnableButton();
