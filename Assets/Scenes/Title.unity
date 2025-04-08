@@ -122,6 +122,129 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &10561389 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -2253911629886400664, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+  m_PrefabInstance: {fileID: 677671606}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &10561390
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10561389}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 3.31, y: 4.8}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: -0.37500003, y: -9.5}
+    oldSize: {x: 3.84, y: 0.48}
+    newSize: {x: 9.6, y: 5.4}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.8400002, y: 0.47999954}
+  m_EdgeRadius: 0
+--- !u!114 &10561391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10561389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 10561396}
+          m_TargetAssemblyTypeName: ScoreButtonUI, Assembly-CSharp
+          m_MethodName: OnPointerEnter
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 10561396}
+          m_TargetAssemblyTypeName: ScoreButtonUI, Assembly-CSharp
+          m_MethodName: OnPointerExit
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 10561396}
+          m_TargetAssemblyTypeName: ScoreButtonUI, Assembly-CSharp
+          m_MethodName: OnPointerClick
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &10561396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10561389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e03f57ba40e542947a1868376d8989bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &190795912 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1160356261127867848, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
@@ -154,7 +277,7 @@ PrefabInstance:
     - target: {fileID: 3626916397498700004, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -2681440482499194360, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      objectReference: {fileID: 6565263091254117122, guid: a3593d2555886f4408c68aeb88c4998f, type: 3}
     - target: {fileID: 3626916397498700004, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -254,10 +377,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 3.31, y: 4}
+  m_Offset: {x: 3.31, y: 3.2}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: -0.3619792, y: -7.833333}
+    pivot: {x: -0.3619792, y: -6.166667}
     oldSize: {x: 3.84, y: 0.48}
     newSize: {x: 9.6, y: 5.4}
     adaptiveTilingThreshold: 0.5
@@ -369,7 +492,7 @@ PrefabInstance:
     - target: {fileID: 3626916397498700004, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 2916279614085463129, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 3626916397498700004, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -377,6 +500,10 @@ PrefabInstance:
     - target: {fileID: 3626916397498700004, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
       propertyPath: m_SortingOrder
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626916397498700004, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -513,6 +640,7 @@ MonoBehaviour:
   okuuButtonUI: {fileID: 1333002984}
   orinButtonUI: {fileID: 1575220978}
   satoriButtonUI: {fileID: 766547127}
+  scoreButtonUI: {fileID: 10561396}
   optionButtonUI: {fileID: 1120459162}
   quitButtonUI: {fileID: 219867174}
   Koishi: {fileID: 1257942227}
@@ -724,6 +852,96 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
       insertIndex: -1
       addedObject: {fileID: 298797092}
+  m_SourcePrefab: {fileID: -8435245712485981826, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+--- !u!1001 &677671606
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -2253911629886400664, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      propertyPath: m_Name
+      value: Score
+      objectReference: {fileID: 0}
+    - target: {fileID: -2253911629886400664, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160356261127867848, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160356261127867848, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 8330c83f03246904a87e2a3bb4ccea3f, type: 2}
+    - target: {fileID: 3626916397498700004, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -8729890844496630631, guid: a3593d2555886f4408c68aeb88c4998f, type: 3}
+    - target: {fileID: 3626916397498700004, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626916397498700004, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      propertyPath: m_SortingOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7878350319992209165, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7878350319992209165, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7878350319992209165, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7878350319992209165, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7878350319992209165, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7878350319992209165, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7878350319992209165, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7878350319992209165, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7878350319992209165, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7878350319992209165, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 10561396}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 10561391}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 10561390}
   m_SourcePrefab: {fileID: -8435245712485981826, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
 --- !u!1 &766547120 stripped
 GameObject:
@@ -946,7 +1164,7 @@ PrefabInstance:
     - target: {fileID: 3626916397498700004, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 8948410682820831670, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      objectReference: {fileID: -5115356224935744602, guid: a3593d2555886f4408c68aeb88c4998f, type: 3}
     - target: {fileID: 3626916397498700004, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -1046,10 +1264,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 3.31, y: 4.8}
+  m_Offset: {x: 3.31, y: 4}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: -0.3619792, y: -9.5}
+    pivot: {x: -0.3619792, y: -7.833333}
     oldSize: {x: 3.84, y: 0.48}
     newSize: {x: 9.6, y: 5.4}
     adaptiveTilingThreshold: 0.5
@@ -1617,7 +1835,7 @@ PrefabInstance:
     - target: {fileID: 3626916397498700004, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -8801856724008318067, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 3626916397498700004, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1625,6 +1843,10 @@ PrefabInstance:
     - target: {fileID: 3626916397498700004, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
       propertyPath: m_SortingOrder
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626916397498700004, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1866,6 +2088,7 @@ SceneRoots:
   - {fileID: 421093818}
   - {fileID: 1088640773}
   - {fileID: 500721584}
+  - {fileID: 677671606}
   - {fileID: 1120459158}
   - {fileID: 219867170}
   - {fileID: 1694035422}

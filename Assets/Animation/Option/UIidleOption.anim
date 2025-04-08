@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UIidleOption
+  m_Name: UIIdleOption
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,9 +21,9 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 8948410682820831670, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      value: {fileID: -5115356224935744602, guid: a3593d2555886f4408c68aeb88c4998f, type: 3}
     - time: 0.05
-      value: {fileID: 8948410682820831670, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+      value: {fileID: -5115356224935744602, guid: a3593d2555886f4408c68aeb88c4998f, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -46,8 +46,8 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 8948410682820831670, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
-    - {fileID: 8948410682820831670, guid: 6359b7dc3305b4243913341d4cfe4aaf, type: 3}
+    - {fileID: -5115356224935744602, guid: a3593d2555886f4408c68aeb88c4998f, type: 3}
+    - {fileID: -5115356224935744602, guid: a3593d2555886f4408c68aeb88c4998f, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

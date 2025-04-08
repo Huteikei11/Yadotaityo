@@ -2,21 +2,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class StartButtonUI : MonoBehaviour
+public class ScoreButtonUI : MonoBehaviour
 {
     private Animator animator;
     private EventTrigger eventTrigger;
     private SpriteRenderer spriteRenderer; // スプライトを非表示にする用
-
-    [SerializeField] private OkuuButtonUI okuuButtonUI;
-    [SerializeField] private OrinButtonUI orinButtonUI;
-    [SerializeField] private SatoriButtonUI satoriButtonUI;
-
-    [SerializeField] private ScoreButtonUI scoreButtonUI;
-    [SerializeField] private OptionButtonUI optionButtonUI;
-    [SerializeField] private QuitButtonUI quitButtonUI;
-    [SerializeField] private Animator Koishi;
-    [SerializeField] private Animator Titlelogo;
 
     void Start()
     {
@@ -24,7 +14,6 @@ public class StartButtonUI : MonoBehaviour
         eventTrigger = GetComponent<EventTrigger>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         EnableButton();
-
     }
 
     // ボタンを有効にする
@@ -64,28 +53,15 @@ public class StartButtonUI : MonoBehaviour
     {
         if (eventTrigger.enabled)
         {
-            Koishi.SetTrigger("Open");
-            Titlelogo.SetTrigger("Move");
             animator.SetTrigger("isClicked");
-            CloseButton();
-
             Invoke("Action", 1.5f);
         }
     }
 
-    //ボタンの中身
+    //リトライボタンの中身
     private void Action()
     {
-        okuuButtonUI.EnableButton();
-        orinButtonUI.EnableButton();
-        satoriButtonUI.EnableButton();
-    }
 
-    private void CloseButton()
-    {
-        scoreButtonUI.OnMove();
-        optionButtonUI.OnMove();
-        quitButtonUI.OnMove();
     }
 
     public void OnMove()
