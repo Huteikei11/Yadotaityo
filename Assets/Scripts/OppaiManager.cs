@@ -87,7 +87,7 @@ public class OppaiManager : MonoBehaviour
         ecstasyManager.CalEcstasy(animePattern,whoChara);
     }
 
-    void OnHoldEnd()
+    public void OnHoldEnd()
     {
         anim.SetTrigger("Close");
         Debug.Log("’·‰Ÿ‚µI—¹");
