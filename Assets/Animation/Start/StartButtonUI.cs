@@ -71,7 +71,7 @@ public class StartButtonUI : MonoBehaviour
             animator.SetTrigger("isClicked");
             CloseButton();
 
-            Invoke("Action", 0.5f);
+            Invoke("Action", 1f);
         }
     }
 
@@ -82,6 +82,7 @@ public class StartButtonUI : MonoBehaviour
         orinButtonUI.EnableButton();
         satoriButtonUI.EnableButton();
         exitButtonUItitle.EnableButton();
+        DisableButton();
     }
 
     private void CloseButton()
@@ -89,12 +90,11 @@ public class StartButtonUI : MonoBehaviour
         scoreButtonUI.OnMove();
         optionButtonUI.OnMove();
         quitButtonUI.OnMove();
-        DisableButton();
     }
 
     public void OnMove()
     {
         animator.SetTrigger("isMoved");
-        DisableButton();
+        Invoke("DisableButton", 0.5f);
     }
 }

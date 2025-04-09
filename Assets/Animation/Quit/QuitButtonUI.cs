@@ -11,6 +11,7 @@ public class QuitButtonUI : MonoBehaviour
 
     [SerializeField] private StartButtonUI startButtonUI;
     [SerializeField] private OptionButtonUI optionButtonUI;
+    [SerializeField] private ScoreButtonUI scoreButtonUI;
 
     void Start()
     {
@@ -78,12 +79,13 @@ public class QuitButtonUI : MonoBehaviour
     public void OnMove()
     {
         animator.SetTrigger("isMoved");
-        DisableButton();
+        Invoke("DisableButton", 0.5f);
     }
 
     private void CloseButton()
     {
         optionButtonUI.OnMove();
         startButtonUI.OnMove();
+        scoreButtonUI.OnMove();
     }
 }

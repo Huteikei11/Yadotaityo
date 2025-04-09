@@ -8,6 +8,8 @@ public class ScoreButtonUI : MonoBehaviour
     private EventTrigger eventTrigger;
     private SpriteRenderer spriteRenderer; // スプライトを非表示にする用
 
+    [SerializeField] private HighScoreDisplay highScoreDisplay;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -54,20 +56,20 @@ public class ScoreButtonUI : MonoBehaviour
     {
         if (eventTrigger.enabled)
         {
-            animator.SetTrigger("isClicked");
-            Invoke("Action", 1.5f);
+            //animator.SetTrigger("isClicked");
+            Invoke("Action", 0.5f);
         }
     }
 
     //リトライボタンの中身
     private void Action()
     {
-
+        highScoreDisplay.ShowHighScores();
     }
 
     public void OnMove()
     {
         animator.SetTrigger("isMoved");
-        DisableButton();
+        Invoke("DisableButton", 0.5f);
     }
 }
