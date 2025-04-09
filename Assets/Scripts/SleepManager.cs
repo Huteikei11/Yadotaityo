@@ -158,9 +158,13 @@ public class SleepManager : MonoBehaviour
     public void PlusSleepDeepNotHolding()//‚¨‚Á‚Ï‚¢‚ÉG‚ê‚Ä‚¢‚È‚¢‚Æ‚«
     {
         float addpoint = 0;
-        if (sleepDeep >= 50)
+        if (sleepDeep >= (wakeup / 1.1))
         {
-            addpoint += 0.007f;//‡–°ƒQ[ƒW‚ª”¼•ªˆÈã‚Å‘‰Á
+            addpoint += 0.03f;//‡–°ƒQ[ƒW‚ªÅI’iŠKˆÈã‚Å‚³‚ç‚É‘‰Á
+        }
+        else if (sleepDeep >= 50)
+        {
+            addpoint += 0.02f;//‡–°ƒQ[ƒW‚ª”¼•ªˆÈã‚Å‘‰Á
         }
         else
         {
@@ -195,6 +199,7 @@ public class SleepManager : MonoBehaviour
             if (oppaiManager.isHolding|| Input.GetMouseButton(0))
             {
                 becameTrue = true;
+                break;
             }
             timer += Time.deltaTime;
             yield return null;
