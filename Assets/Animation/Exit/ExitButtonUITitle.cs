@@ -2,26 +2,30 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class SatoriButtonUI : MonoBehaviour
+public class ExitButtonUITitle : MonoBehaviour
 {
     private Animator animator;
     private EventTrigger eventTrigger;
     private SpriteRenderer spriteRenderer; // スプライトを非表示にする用
 
+    [SerializeField] private StartButtonUI startButtonUI;
+    [SerializeField] private ScoreButtonUI scoreButtonUI;
+    [SerializeField] private OptionButtonUI optionButtonUI;
+    [SerializeField] private QuitButtonUI quitButtonUI;
+    [SerializeField] private Animator Koishi;
+    [SerializeField] private Animator TitleLogo;
+
     [SerializeField] private OkuuButtonUI okuuButtonUI;
     [SerializeField] private OrinButtonUI orinButtonUI;
-    [SerializeField] private ExitButtonUITitle exitButtonUItitle;
+    [SerializeField] private SatoriButtonUI satoriButtonUI;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         eventTrigger = GetComponent<EventTrigger>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-        eventTrigger.enabled = false;
-        spriteRenderer.enabled = false;
+        DisableButton();
     }
-
 
     // ボタンを有効にする
     public void EnableButton()
@@ -64,23 +68,27 @@ public class SatoriButtonUI : MonoBehaviour
             animator.SetTrigger("isClicked");
             CloseButton();
 
-            Invoke("Action", 1.5f);
+            Invoke("Action", 1f);
         }
     }
 
     //リトライボタンの中身
     private void Action()
     {
-        DifficultyManager.Instance.StartGame("Main", 2);
+        startButtonUI.EnableButton();
+        scoreButtonUI.EnableButton();
+        optionButtonUI.EnableButton();
+        quitButtonUI.EnableButton();
     }
 
     private void CloseButton()
     {
+        Koishi.SetTrigger("Close");
+        TitleLogo.SetTrigger("Open");
         okuuButtonUI.OnMove();
         orinButtonUI.OnMove();
-        exitButtonUItitle.OnMove();
+        satoriButtonUI.OnMove();
     }
-
     public void OnMove()
     {
         animator.SetTrigger("isMoved");

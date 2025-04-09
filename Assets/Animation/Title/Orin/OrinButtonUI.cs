@@ -10,6 +10,8 @@ public class OrinButtonUI : MonoBehaviour
 
     [SerializeField] private OkuuButtonUI okuuButtonUI;
     [SerializeField] private SatoriButtonUI satoriButtonUI;
+    [SerializeField] private ExitButtonUITitle exitButtonUItitle;
+
 
     void Start()
     {
@@ -76,11 +78,12 @@ public class OrinButtonUI : MonoBehaviour
     {
         okuuButtonUI.OnMove();
         satoriButtonUI.OnMove();
+        exitButtonUItitle.OnMove();
     }
 
     public void OnMove()
     {
         animator.SetTrigger("isMoved");
-        DisableButton();
+        Invoke("DisableButton", 0.5f);
     }
 }

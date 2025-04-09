@@ -11,6 +11,7 @@ public class StartButtonUI : MonoBehaviour
     [SerializeField] private OkuuButtonUI okuuButtonUI;
     [SerializeField] private OrinButtonUI orinButtonUI;
     [SerializeField] private SatoriButtonUI satoriButtonUI;
+    [SerializeField] private ExitButtonUITitle exitButtonUItitle;
 
     [SerializeField] private ScoreButtonUI scoreButtonUI;
     [SerializeField] private OptionButtonUI optionButtonUI;
@@ -32,6 +33,7 @@ public class StartButtonUI : MonoBehaviour
     {
         if (eventTrigger != null) eventTrigger.enabled = true;
         if (spriteRenderer != null) spriteRenderer.enabled = true; // スプライトを表示
+        animator.SetTrigger("Open");
     }
 
     // ボタンを無効にする（クリックできなくし、見えなくする）
@@ -69,7 +71,7 @@ public class StartButtonUI : MonoBehaviour
             animator.SetTrigger("isClicked");
             CloseButton();
 
-            Invoke("Action", 1.5f);
+            Invoke("Action", 0.5f);
         }
     }
 
@@ -79,6 +81,7 @@ public class StartButtonUI : MonoBehaviour
         okuuButtonUI.EnableButton();
         orinButtonUI.EnableButton();
         satoriButtonUI.EnableButton();
+        exitButtonUItitle.EnableButton();
     }
 
     private void CloseButton()

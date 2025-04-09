@@ -25,6 +25,7 @@ public class QuitButtonUI : MonoBehaviour
     {
         if (eventTrigger != null) eventTrigger.enabled = true;
         if (spriteRenderer != null) spriteRenderer.enabled = true; // スプライトを表示
+        animator.SetTrigger("Open");
     }
 
     // ボタンを無効にする（クリックできなくし、見えなくする）
