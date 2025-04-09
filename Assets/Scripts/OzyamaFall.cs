@@ -91,7 +91,7 @@ public class OzyamaFall : MonoBehaviour
 
         while (timer < 0.1f)
         {
-            if (oppaiManager.isHolding)
+            if (oppaiManager.isHolding|| Input.GetMouseButton(0))
             {
                 becameTrue = true;
             }

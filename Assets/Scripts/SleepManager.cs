@@ -160,11 +160,11 @@ public class SleepManager : MonoBehaviour
         float addpoint = 0;
         if (sleepDeep >= 50)
         {
-            addpoint += 0.005f;//睡眠ゲージが半分以上で増加
+            addpoint += 0.007f;//睡眠ゲージが半分以上で増加
         }
         else
         {
-            addpoint -= 0.0015f; //睡眠ゲージが半分以下で減少
+            addpoint -= 0.002f; //睡眠ゲージが半分以下で減少
         }
         AddSleepDeep(addpoint);
     }
@@ -188,11 +188,16 @@ public class SleepManager : MonoBehaviour
 
         Debug.Log("監視開始");
 
+        float timer = 0f;
         bool becameTrue = false;
-
-        if (oppaiManager.isHolding)
+        while (timer < 3f)//三秒おきたまま
         {
-            becameTrue = true;
+            if (oppaiManager.isHolding|| Input.GetMouseButton(0))
+            {
+                becameTrue = true;
+            }
+            timer += Time.deltaTime;
+            yield return null;
         }
 
 
