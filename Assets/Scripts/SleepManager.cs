@@ -20,6 +20,7 @@ public class SleepManager : MonoBehaviour
     [SerializeField] private RetryButton RetryButton;
     [SerializeField] private ExitButtonUI exitButtonUI;
     [SerializeField] private OzyamaFall OzyamaFall;
+    [SerializeField] private GameoverSprite gameoversprite;
     // Start is called before the first frame update
     void Start()
     {
@@ -85,18 +86,18 @@ public class SleepManager : MonoBehaviour
                         addpoint = 0.01f;
                         break;
                     case 1:
-                        addpoint += 0.015f;
+                        addpoint = 0.015f;
                         break;
 
                     case 2:
-                        addpoint += 0.02f;
+                        addpoint = 0.02f;
                         break;
 
                     case 3:
-                        addpoint += 0.05f;
+                        addpoint = 0.05f;
                         break;
                     case 4:
-                        addpoint += 0.08f;
+                        addpoint = 0.08f;
                         break;
                 }
                 break;
@@ -108,18 +109,18 @@ public class SleepManager : MonoBehaviour
                         addpoint = 0.001f;
                         break;
                     case 1:
-                        addpoint += 0.015f;
+                        addpoint = 0.015f;
                         break;
 
                     case 2:
-                        addpoint += 0.02f;
+                        addpoint = 0.02f;
                         break;
 
                     case 3:
-                        addpoint += 0.05f;
+                        addpoint = 0.05f;
                         break;
                     case 4:
-                        addpoint += 0.05f;
+                        addpoint = 0.05f;
                         break;
                 }
                 break;
@@ -131,18 +132,18 @@ public class SleepManager : MonoBehaviour
                         addpoint = 0.001f;
                         break;
                     case 1:
-                        addpoint += 0.015f;
+                        addpoint = 0.015f;
                         break;
 
                     case 2:
-                        addpoint += 0.02f;
+                        addpoint = 0.02f;
                         break;
 
                     case 3:
-                        addpoint += 0.05f;
+                        addpoint = 0.05f;
                         break;
                     case 4:
-                        addpoint += 0.05f;
+                        addpoint = 0.05f;
                         break;
                 }
                 break;
@@ -214,8 +215,8 @@ public class SleepManager : MonoBehaviour
     IEnumerator Failed()
     {
         //oppai.speed = 0f;
-        yield return new WaitForSeconds(4f);
-
+        //yield return new WaitForSeconds(4f);
+        OzyamaFall.isAllow = false;//ヤマメキスメを止める
 
         //明るくする
         whiteScreen.color = new Color(1, 1, 1, 22/255f);
@@ -232,7 +233,8 @@ public class SleepManager : MonoBehaviour
 
         //ゲームオーバー画面表示
         yield return new WaitForSeconds(3f);
-        gameover.SetTrigger("Failed");
+        oppaiManager.isTouch = false;
+        gameoversprite.gameover();
 
         //ボタンを表示
         RetryButton.EnableButton();
