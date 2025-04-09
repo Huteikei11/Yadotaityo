@@ -94,10 +94,10 @@ public class SleepManager : MonoBehaviour
                         break;
 
                     case 3:
-                        addpoint = 0.05f;
+                        addpoint = 0.04f;
                         break;
                     case 4:
-                        addpoint = 0.08f;
+                        addpoint = 0.05f;
                         break;
                 }
                 break;
@@ -106,21 +106,21 @@ public class SleepManager : MonoBehaviour
                 switch (pattern)
                 {
                     case 0:
-                        addpoint = 0.001f;
+                        addpoint = 0.01f;
                         break;
                     case 1:
-                        addpoint = 0.015f;
+                        addpoint = 0.02f;
                         break;
 
                     case 2:
-                        addpoint = 0.02f;
+                        addpoint = 0.03f;
                         break;
 
                     case 3:
                         addpoint = 0.05f;
                         break;
                     case 4:
-                        addpoint = 0.05f;
+                        addpoint = 0.07f;
                         break;
                 }
                 break;
@@ -129,21 +129,21 @@ public class SleepManager : MonoBehaviour
                 switch (pattern)
                 {
                     case 0:
-                        addpoint = 0.001f;
+                        addpoint = 0.002f;
                         break;
                     case 1:
-                        addpoint = 0.015f;
+                        addpoint = 0.03f;
                         break;
 
                     case 2:
-                        addpoint = 0.02f;
+                        addpoint = 0.04f;
                         break;
 
                     case 3:
-                        addpoint = 0.05f;
+                        addpoint = 0.06f;
                         break;
                     case 4:
-                        addpoint = 0.05f;
+                        addpoint = 0.08f;
                         break;
                 }
                 break;

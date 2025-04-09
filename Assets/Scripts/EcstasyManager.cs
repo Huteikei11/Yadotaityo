@@ -24,14 +24,14 @@ public class EcstasyManager : MonoBehaviour
                 switch (pattern)
                 {
                     case 0:
-                        addpoint = 0.001f;
+                        addpoint = 0.002f;
                         break;
                     case 1:
-                        addpoint += 0.0015f;
+                        addpoint += 0.003f;
                         break;
 
                     case 2:
-                        addpoint += 0.002f;
+                        addpoint += 0.004f;
                         break;
 
                     case 3:
@@ -47,21 +47,21 @@ public class EcstasyManager : MonoBehaviour
                 switch (who)
                 {
                     case 0:
-                        addpoint = 0.001f;
+                        addpoint = 0.0025f;
                         break;
                     case 1:
-                        addpoint += 0.015f;
+                        addpoint += 0.0035f;
                         break;
 
                     case 2:
-                        addpoint += 0.02f;
+                        addpoint += 0.0045f;
                         break;
 
                     case 3:
-                        addpoint += 0.05f;
+                        addpoint += 0.006f;
                         break;
                     case 4:
-                        addpoint += 0.05f;
+                        addpoint += 0.011f;
                         break;
                 }
                 break;
@@ -70,21 +70,21 @@ public class EcstasyManager : MonoBehaviour
                 switch (who)
                 {
                     case 0:
-                        addpoint = 0.001f;
+                        addpoint = 0.0025f;
                         break;
                     case 1:
-                        addpoint += 0.015f;
+                        addpoint += 0.035f;
                         break;
 
                     case 2:
-                        addpoint += 0.02f;
+                        addpoint += 0.005f;
                         break;
 
                     case 3:
-                        addpoint += 0.05f;
+                        addpoint += 0.007f;
                         break;
                     case 4:
-                        addpoint += 0.05f;
+                        addpoint += 0.015f;
                         break;
                 }
                 break;
