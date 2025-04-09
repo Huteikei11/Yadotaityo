@@ -229,15 +229,15 @@ public class SleepManager : MonoBehaviour
         OzyamaFall.isAllow = false;//ヤマメキスメを止める
 
         //明るくする
-        whiteScreen.color = new Color(1, 1, 1, 22/255f);
+        whiteScreen.color = new Color(1, 0, 0, 40/255f);
         yield return new WaitForSeconds(0.2f);
-        whiteScreen.color = new Color(0, 0, 0, 100/255f);
+        whiteScreen.color = new Color(0, 0, 0, 40/255f);
         yield return new WaitForSeconds(1f);
 
         // ホワイトアウト開始
-        for (float t = 0; t < 22/255f; t += Time.deltaTime/5)
+        for (float t = 0; t < 100/255f; t += Time.deltaTime/5)
         {
-            whiteScreen.color = new Color(1, 1, 1, t);
+            whiteScreen.color = new Color(1, 0, 0, t);
             yield return null;
         }
 
