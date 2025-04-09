@@ -71,5 +71,6 @@ public class OptionButtonUI : MonoBehaviour
     public void OnMove()
     {
         animator.SetTrigger("isMoved");
+        DisableButton();
     }
 }

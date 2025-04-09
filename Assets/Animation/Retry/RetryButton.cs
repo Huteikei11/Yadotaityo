@@ -76,5 +76,6 @@ public class RetryButton : MonoBehaviour
     public void OnMove()
     {
         animator.SetTrigger("isMoved");
+        DisableButton();
     }
 }

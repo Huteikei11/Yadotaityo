@@ -76,5 +76,6 @@ public class ExitButtonUI : MonoBehaviour
     public void OnMove()
     {
         animator.SetTrigger("isMoved");
+        DisableButton();
     }
 }

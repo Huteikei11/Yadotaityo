@@ -80,5 +80,6 @@ public class OkuuButtonUI : MonoBehaviour
     public void OnMove()
     {
         animator.SetTrigger("isMoved");
+        DisableButton();
     }
 }

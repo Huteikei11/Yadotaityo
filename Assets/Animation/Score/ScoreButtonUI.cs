@@ -67,5 +67,6 @@ public class ScoreButtonUI : MonoBehaviour
     public void OnMove()
     {
         animator.SetTrigger("isMoved");
+        DisableButton();
     }
 }

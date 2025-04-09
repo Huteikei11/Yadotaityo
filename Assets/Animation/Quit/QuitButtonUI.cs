@@ -77,6 +77,7 @@ public class QuitButtonUI : MonoBehaviour
     public void OnMove()
     {
         animator.SetTrigger("isMoved");
+        DisableButton();
     }
 
     private void CloseButton()

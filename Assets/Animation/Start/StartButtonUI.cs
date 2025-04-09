@@ -86,10 +86,12 @@ public class StartButtonUI : MonoBehaviour
         scoreButtonUI.OnMove();
         optionButtonUI.OnMove();
         quitButtonUI.OnMove();
+        DisableButton();
     }
 
     public void OnMove()
     {
         animator.SetTrigger("isMoved");
+        DisableButton();
     }
 }
