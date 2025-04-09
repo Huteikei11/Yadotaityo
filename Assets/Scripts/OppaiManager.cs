@@ -1,4 +1,7 @@
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class OppaiManager : MonoBehaviour
 {
@@ -11,11 +14,12 @@ public class OppaiManager : MonoBehaviour
     [SerializeField] private SleepManager sleepManager;
     [SerializeField] private EcstasyManager ecstasyManager;
     public Animator anim;
+    [SerializeField] private Image whiteScreen;
 
     private void Start()
     {
         whoChara = DifficultyManager.Instance != null ? DifficultyManager.Instance.GetDifficulty() : 0;
-        anim.SetInteger("difficult",whoChara);
+        anim.SetInteger("difficult", whoChara);
     }
     void Update()
     {
@@ -28,8 +32,7 @@ public class OppaiManager : MonoBehaviour
 
             if (Input.GetMouseButtonDown(1))//右クリック
             {
-                animePattern = ChangeAnimation(animePattern);//アニメのpatternを変える処理
-                anim.SetInteger("animePattern", animePattern);
+                StartCoroutine(RightClick());
             }
 
             if (Input.GetMouseButton(0))
@@ -84,7 +87,7 @@ public class OppaiManager : MonoBehaviour
     {
         Debug.Log("長押し中...");
         sleepManager.CalSleepDeepOppai(animePattern, whoChara);
-        ecstasyManager.CalEcstasy(animePattern,whoChara);
+        ecstasyManager.CalEcstasy(animePattern, whoChara);
     }
 
     public void OnHoldEnd()
@@ -104,7 +107,7 @@ public class OppaiManager : MonoBehaviour
         isTouch = true;
     }
     public void StopOppai() //操作を許可しない
-    { 
+    {
         isTouch = false;
     }
 
@@ -117,5 +120,29 @@ public class OppaiManager : MonoBehaviour
     public int GetChara()
     {
         return whoChara;
+    }
+
+    private IEnumerator RightClick()
+    {
+
+        if (isHolding)
+        {
+            // ホワイトアウト開始
+            whiteScreen.gameObject.SetActive(true);
+            for (float t = 0; t < 1f; t += Time.deltaTime * 4)
+            {
+                whiteScreen.color = new Color(0.3098039f, 0.1882353f, 0.2980392f, t);
+                yield return null;
+            }
+            animePattern = ChangeAnimation(animePattern);//アニメのpatternを変える処理
+            anim.SetInteger("animePattern", animePattern);
+            // ホワイトイン開始（画面を白からフェードアウト）
+            for (float t = 1f; t > 0; t -= Time.deltaTime * 4)
+            {
+                whiteScreen.color = new Color(0.3098039f, 0.1882353f, 0.2980392f, t);
+                yield return null;
+            }
+        }
+
     }
 }

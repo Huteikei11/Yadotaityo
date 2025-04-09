@@ -172,7 +172,7 @@ public class SleepManager : MonoBehaviour
     public void WakeUpChara()//キャラクターが起きる時の処理
     {
         OzyamaFall.isAllow = false;
-                Debug.Log("おきた");
+        Debug.Log("おきた");
         sleepDeep = 0;
         StartCoroutine(WatchBool());
 
@@ -184,7 +184,7 @@ public class SleepManager : MonoBehaviour
     {
         anim.SetTrigger("up");
         // まず待つ
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.4f);
 
         Debug.Log("監視開始");
 
