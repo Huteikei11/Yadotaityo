@@ -19,7 +19,21 @@ public class OzyamaFall : MonoBehaviour
     [SerializeField] EcstasyManager EcstasyManager;
 
     public bool isAllow = true;
-    // Start is called before the first frame update
+
+    // Inspector から編集可能な値
+    [Header("ScheduleNextNoise の設定")]
+    [SerializeField] private float minNoiseInterval = 5f; // ランダム時間の最小値
+    [SerializeField] private float maxNoiseInterval = 10f; // ランダム時間の最大値
+
+    [Header("CheckAndExecuteNoise の設定")]
+    [SerializeField] private float noiseExecutionThreshold = 0.4f; // 確率の閾値
+
+    [Header("FallObject の設定")]
+    [SerializeField] private float charaSelectionChance = 50f; // キャラ選択の確率
+    [SerializeField] private float motionSelectionChance = 50f; // モーション選択の確率
+
+    [Header("WatchBool の設定")]
+    [SerializeField] private float watchWaitTime = 2.5f; // 待ち時間
 
     void Awake()
     {
@@ -38,23 +52,16 @@ public class OzyamaFall : MonoBehaviour
         ScheduleNextNoise(); // 次のノイズスケジュールを設定
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    //ノイズを加える時間
+    // ノイズを加える時間
     private void ScheduleNextNoise()
     {
-        float nextTime = Random.Range(5f, 10f); // 1〜5秒のランダムな時間を設定
+        float nextTime = Random.Range(minNoiseInterval, maxNoiseInterval); // ランダムな時間を設定
         Invoke("CheckAndExecuteNoise", nextTime);
     }
 
-
     private void CheckAndExecuteNoise()
     {
-
-        if (Random.value > 0.4f) // 確率で実行(Radom.Valueは0~1.0)
+        if (Random.value > noiseExecutionThreshold) // 確率で実行
         {
             if (isAllow)
             {
@@ -66,14 +73,14 @@ public class OzyamaFall : MonoBehaviour
 
     public void FallObject()
     {
-        //キャラを選択
-        ozyamaChara = GetRandomChoice(50);
-        //モーションを選択
-        motion = GetRandomChoice(50);
+        // キャラを選択
+        ozyamaChara = GetRandomChoice(charaSelectionChance);
+        // モーションを選択
+        motion = GetRandomChoice(motionSelectionChance);
         anim.SetInteger("Chara", ozyamaChara);
         anim.SetInteger("Motion", motion);
         anim.SetTrigger("Entry");
-        if(motion == 1)
+        if (motion == 1)
         {
             StartCoroutine(WatchBool());
         }
@@ -82,7 +89,7 @@ public class OzyamaFall : MonoBehaviour
     IEnumerator WatchBool()
     {
         // まず待つ
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(watchWaitTime);
 
         Debug.Log("監視開始（1秒間）");
 
@@ -91,7 +98,7 @@ public class OzyamaFall : MonoBehaviour
 
         while (timer < 0.1f)
         {
-            if (oppaiManager.isHolding|| Input.GetMouseButton(0))
+            if (oppaiManager.isHolding || Input.GetMouseButton(0))
             {
                 becameTrue = true;
             }
@@ -167,8 +174,4 @@ public class OzyamaFall : MonoBehaviour
         float rand = Random.Range(0f, 100f);
         return rand < chanceForOne ? 1 : 0;
     }
-
-
 }
-
-

@@ -10,105 +10,62 @@ public class EcstasyManager : MonoBehaviour
     [SerializeField] private OzyamaFall OzyamaFall;
     public bool isAllowCal;
 
+    // Inspector から編集可能な値
+    [Header("お空 (okuu) のエクスタシー増加値")]
+    public float[] okuuAddPoints = { 0.002f, 0.003f, 0.004f, 0.005f, 0.01f };
+
+    [Header("おりん (orin) のエクスタシー増加値")]
+    public float[] orinAddPoints = { 0.0025f, 0.0035f, 0.0045f, 0.006f, 0.011f };
+
+    [Header("さとり (satori) のエクスタシー増加値")]
+    public float[] satoriAddPoints = { 0.0025f, 0.035f, 0.005f, 0.007f, 0.015f };
+
     // Update is called once per frame
     void Update()
     {
-        
     }
-    public void CalEcstasy(int pattern,int who)
+
+    public void CalEcstasy(int pattern, int who)
     {
         float addpoint = 0;
         switch (who)
         {
-            case 0://お空ちゃん
-                switch (pattern)
-                {
-                    case 0:
-                        addpoint = 0.002f;
-                        break;
-                    case 1:
-                        addpoint += 0.003f;
-                        break;
-
-                    case 2:
-                        addpoint += 0.004f;
-                        break;
-
-                    case 3:
-                        addpoint += 0.005f;
-                        break;
-                    case 4:
-                        addpoint += 0.01f;
-                        break;
-                }
+            case 0: // お空 (okuu)
+                if (pattern >= 0 && pattern < okuuAddPoints.Length)
+                    addpoint = okuuAddPoints[pattern];
                 break;
 
-            case 1://おりんちゃん
-                switch (who)
-                {
-                    case 0:
-                        addpoint = 0.0025f;
-                        break;
-                    case 1:
-                        addpoint += 0.0035f;
-                        break;
-
-                    case 2:
-                        addpoint += 0.0045f;
-                        break;
-
-                    case 3:
-                        addpoint += 0.006f;
-                        break;
-                    case 4:
-                        addpoint += 0.011f;
-                        break;
-                }
+            case 1: // おりん (orin)
+                if (pattern >= 0 && pattern < orinAddPoints.Length)
+                    addpoint = orinAddPoints[pattern];
                 break;
 
-            case 2://さとりちゃん
-                switch (who)
-                {
-                    case 0:
-                        addpoint = 0.0025f;
-                        break;
-                    case 1:
-                        addpoint += 0.035f;
-                        break;
-
-                    case 2:
-                        addpoint += 0.005f;
-                        break;
-
-                    case 3:
-                        addpoint += 0.007f;
-                        break;
-                    case 4:
-                        addpoint += 0.015f;
-                        break;
-                }
+            case 2: // さとり (satori)
+                if (pattern >= 0 && pattern < satoriAddPoints.Length)
+                    addpoint = satoriAddPoints[pattern];
                 break;
-
         }
+
         if (isAllowCal)
         {
-           AddEcstacy(addpoint);
+            AddEcstacy(addpoint);
         }
     }
-    public void AddEcstacy(float delta) 
+
+    public void AddEcstacy(float delta)
     {
-        if (!isEcstasy)//射精していたら100のまま
+        if (!isEcstasy) // 射精していたら100のまま
         {
             ecstacyGage = Mathf.Clamp(ecstacyGage + delta, 0, 100);
-            //Debug.Log($"射精ゲージ{ecstacyGage}");
-            if (ecstacyGage >= 100)//射精するか判定
+            if (ecstacyGage >= 100) // 射精するか判定
             {
                 isEcstasy = true;
                 Ecstasy();
             }
         }
     }
-    private void Ecstasy()//射精の演出
+
+    private void Ecstasy() // 射精の演出
     {
         OzyamaFall.isAllow = false;
         Debug.Log("射精!");

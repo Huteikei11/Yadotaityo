@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Net;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,7 +20,25 @@ public class SleepManager : MonoBehaviour
     [SerializeField] private ExitButtonUI exitButtonUI;
     [SerializeField] private OzyamaFall OzyamaFall;
     [SerializeField] private GameoverSprite gameoversprite;
-    // Start is called before the first frame update
+
+    // Inspector から編集可能な値
+    [Header("お空 (okuu) の睡眠度増加値")]
+    public float[] okuuAddPoints = { 0.01f, 0.015f, 0.02f, 0.04f, 0.05f };
+
+    [Header("おりん (orin) の睡眠度増加値")]
+    public float[] orinAddPoints = { 0.01f, 0.02f, 0.03f, 0.05f, 0.07f };
+
+    [Header("さとり (satori) の睡眠度増加値")]
+    public float[] satoriAddPoints = { 0.002f, 0.03f, 0.04f, 0.06f, 0.08f };
+
+    [Header("PlusSleepDeepNotHolding の設定")]
+    [SerializeField] private float finalStageIncrease = 0.03f; // 最終段階以上で増加する値
+    [SerializeField] private float halfStageIncrease = 0.02f;  // 半分以上で増加する値
+    [SerializeField] private float belowHalfDecrease = -0.002f; // 半分以下で減少する値
+
+    [Header("WatchBool の設定")]
+    [SerializeField] private float wakeUpDuration = 3f; // 起きたままでいる時間
+
     void Start()
     {
         who = DifficultyManager.Instance != null ? DifficultyManager.Instance.GetDifficulty() : 0;
@@ -29,7 +46,7 @@ public class SleepManager : MonoBehaviour
         StartFace();
     }
 
-    public void StartFace()//顔の定期更新をする
+    public void StartFace() // 顔の定期更新をする
     {
         faceCoroutine = StartCoroutine(FaceMethod());
     }
@@ -43,7 +60,7 @@ public class SleepManager : MonoBehaviour
         }
     }
 
-    IEnumerator FaceMethod() //顔の定期更新する中身
+    IEnumerator FaceMethod() // 顔の定期更新する中身
     {
         while (true)
         {
@@ -69,134 +86,76 @@ public class SleepManager : MonoBehaviour
                 Debug.Log($"SleepDeep: {sleepDeep}, Wakeup: {wakeup}, New FacePattern: {facePattern}");
             }
 
-
             yield return new WaitForSeconds(1.0f);
         }
     }
 
-    public void CalSleepDeepOppai(int pattern,int who) //睡眠度をおっぱいで足す
-    {//おっぱい触ってないときは呼ばれないはずなので大丈夫
+    public void CalSleepDeepOppai(int pattern, int who) // 睡眠度をおっぱいで足す
+    {
         float addpoint = 0;
-        switch (who) 
+        switch (who)
         {
-            case 0://お空ちゃん
-                switch (pattern)
-                {
-                    case 0:
-                        addpoint = 0.01f;
-                        break;
-                    case 1:
-                        addpoint = 0.015f;
-                        break;
-
-                    case 2:
-                        addpoint = 0.02f;
-                        break;
-
-                    case 3:
-                        addpoint = 0.04f;
-                        break;
-                    case 4:
-                        addpoint = 0.05f;
-                        break;
-                }
+            case 0: // お空 (okuu)
+                if (pattern >= 0 && pattern < okuuAddPoints.Length)
+                    addpoint = okuuAddPoints[pattern];
                 break;
 
-            case 1://おりんちゃん
-                switch (pattern)
-                {
-                    case 0:
-                        addpoint = 0.01f;
-                        break;
-                    case 1:
-                        addpoint = 0.02f;
-                        break;
-
-                    case 2:
-                        addpoint = 0.03f;
-                        break;
-
-                    case 3:
-                        addpoint = 0.05f;
-                        break;
-                    case 4:
-                        addpoint = 0.07f;
-                        break;
-                }
+            case 1: // おりん (orin)
+                if (pattern >= 0 && pattern < orinAddPoints.Length)
+                    addpoint = orinAddPoints[pattern];
                 break;
 
-            case 2://さとりちゃん
-                switch (pattern)
-                {
-                    case 0:
-                        addpoint = 0.002f;
-                        break;
-                    case 1:
-                        addpoint = 0.03f;
-                        break;
-
-                    case 2:
-                        addpoint = 0.04f;
-                        break;
-
-                    case 3:
-                        addpoint = 0.06f;
-                        break;
-                    case 4:
-                        addpoint = 0.08f;
-                        break;
-                }
+            case 2: // さとり (satori)
+                if (pattern >= 0 && pattern < satoriAddPoints.Length)
+                    addpoint = satoriAddPoints[pattern];
                 break;
         }
         AddSleepDeep(addpoint);
     }
-    public void PlusSleepDeepFallObj(float value)//ものが落ちてきたときに睡眠度を足す
+
+    public void PlusSleepDeepFallObj(float value) // ものが落ちてきたときに睡眠度を足す
     {
         AddSleepDeep(value);
     }
 
-    public void PlusSleepDeepNotHolding()//おっぱいに触れていないとき
+    public void PlusSleepDeepNotHolding() // おっぱいに触れていないとき
     {
         float addpoint = 0;
         if (sleepDeep >= (wakeup / 1.1))
         {
-            addpoint += 0.03f;//睡眠ゲージが最終段階以上でさらに増加
+            addpoint += finalStageIncrease; // 最終段階以上でさらに増加
         }
         else if (sleepDeep >= 50)
         {
-            addpoint += 0.02f;//睡眠ゲージが半分以上で増加
+            addpoint += halfStageIncrease; // 睡眠ゲージが半分以上で増加
         }
         else
         {
-            addpoint -= 0.002f; //睡眠ゲージが半分以下で減少
+            addpoint += belowHalfDecrease; // 睡眠ゲージが半分以下で減少
         }
         AddSleepDeep(addpoint);
     }
 
-    public void WakeUpChara()//キャラクターが起きる時の処理
+    public void WakeUpChara() // キャラクターが起きる時の処理
     {
         OzyamaFall.isAllow = false;
         Debug.Log("おきた");
         sleepDeep = 0;
         StartCoroutine(WatchBool());
-
-        
-        
     }
 
     IEnumerator WatchBool()
     {
         anim.SetTrigger("up");
-        // まず待つ
         yield return new WaitForSeconds(0.4f);
 
         Debug.Log("監視開始");
 
         float timer = 0f;
         bool becameTrue = false;
-        while (timer < 3f)//三秒おきたまま
+        while (timer < wakeUpDuration) // 起きたままの時間を比較
         {
-            if (oppaiManager.isHolding|| Input.GetMouseButton(0))
+            if (oppaiManager.isHolding || Input.GetMouseButton(0))
             {
                 becameTrue = true;
                 break;
@@ -205,11 +164,9 @@ public class SleepManager : MonoBehaviour
             yield return null;
         }
 
-
         if (!becameTrue)
         {
             Debug.Log("1秒間、targetBoolは一度もtrueになりませんでした！");
-            //また寝る
             OzyamaFall.isAllow = true;
             anim.SetTrigger("Sleep");
         }
@@ -218,45 +175,37 @@ public class SleepManager : MonoBehaviour
             Debug.Log("1秒間のうちにtargetBoolがtrueになりました！");
             StartCoroutine(Failed());
         }
-
-
     }
 
     IEnumerator Failed()
     {
-        //oppai.speed = 0f;
-        //yield return new WaitForSeconds(4f);
-        OzyamaFall.isAllow = false;//ヤマメキスメを止める
+        OzyamaFall.isAllow = false;
 
-        //明るくする
-        whiteScreen.color = new Color(1, 0, 0, 40/255f);
+        whiteScreen.color = new Color(1, 0, 0, 40 / 255f);
         yield return new WaitForSeconds(0.2f);
-        whiteScreen.color = new Color(0, 0, 0, 40/255f);
+        whiteScreen.color = new Color(0, 0, 0, 40 / 255f);
         yield return new WaitForSeconds(1f);
 
-        // ホワイトアウト開始
-        for (float t = 0; t < 100/255f; t += Time.deltaTime/5)
+        for (float t = 0; t < 100 / 255f; t += Time.deltaTime / 5)
         {
             whiteScreen.color = new Color(1, 0, 0, t);
             yield return null;
         }
 
-        //ゲームオーバー画面表示
         yield return new WaitForSeconds(3f);
         oppaiManager.isTouch = false;
         gameoversprite.gameover();
 
-        //ボタンを表示
         RetryButton.EnableButton();
         exitButtonUI.EnableButton();
     }
 
-    private void AddSleepDeep(float value)//直接睡眠度を足し起きるか判定
+    private void AddSleepDeep(float value) // 直接睡眠度を足し起きるか判定
     {
         sleepDeep = Mathf.Clamp(sleepDeep + value, 0, wakeup);
         if (sleepDeep == wakeup)
         {
-            WakeUpChara();//おはようございます
+            WakeUpChara(); // おはようございます
         }
     }
 }

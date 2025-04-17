@@ -11,7 +11,8 @@ public class GameStartCanvas : MonoBehaviour
         //ステージの値を渡す必要あり
 
         //場面遷移
-        SceneManager.LoadScene("Main");
+        StartCoroutine(LoadSceneAsync("LoadScene"));
+        //SceneManager.LoadScene("Main");
     }
     public void Orin()
     {
@@ -20,7 +21,8 @@ public class GameStartCanvas : MonoBehaviour
         //ステージの値を渡す必要あり
 
         //場面遷移
-        SceneManager.LoadScene("Main");
+        StartCoroutine(LoadSceneAsync("LoadScene"));
+        //SceneManager.LoadScene("Main");
     }
 
     public void Satori()
@@ -30,6 +32,17 @@ public class GameStartCanvas : MonoBehaviour
         //ステージの値を渡す必要あり
 
         //場面遷移
-        SceneManager.LoadScene("Main");
+        StartCoroutine(LoadSceneAsync("LoadScene")); 
+        //SceneManager.LoadScene("Main");
+    }
+
+    IEnumerator LoadSceneAsync(string sceneName)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
     }
 }
