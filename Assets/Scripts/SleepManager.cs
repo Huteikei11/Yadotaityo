@@ -20,6 +20,7 @@ public class SleepManager : MonoBehaviour
     [SerializeField] private ExitButtonUI exitButtonUI;
     [SerializeField] private OzyamaFall OzyamaFall;
     [SerializeField] private GameoverSprite gameoversprite;
+    [SerializeField] private TextCut textCut;
 
     // Inspector から編集可能な値
     [Header("お空 (okuu) の睡眠度増加値")]
@@ -142,10 +143,13 @@ public class SleepManager : MonoBehaviour
         Debug.Log("おきた");
         sleepDeep = 0;
         StartCoroutine(WatchBool());
+
     }
 
     IEnumerator WatchBool()
     {
+        OzyamaFall.SetFallDuringBool(true);
+        OzyamaFall.anim.SetBool("fallBool", OzyamaFall.GetFallDuringBool());
         anim.SetTrigger("up");
         yield return new WaitForSeconds(0.4f);
 
@@ -155,7 +159,7 @@ public class SleepManager : MonoBehaviour
         bool becameTrue = false;
         while (timer < wakeUpDuration) // 起きたままの時間を比較
         {
-            if (oppaiManager.isHolding || Input.GetMouseButton(0))
+            if (oppaiManager.isHolding)
             {
                 becameTrue = true;
                 break;
@@ -169,6 +173,8 @@ public class SleepManager : MonoBehaviour
             Debug.Log("1秒間、targetBoolは一度もtrueになりませんでした！");
             OzyamaFall.isAllow = true;
             anim.SetTrigger("Sleep");
+            OzyamaFall.SetFallDuringBool(false);
+            OzyamaFall.anim.SetBool("fallBool", OzyamaFall.GetFallDuringBool());
         }
         else
         {
@@ -191,7 +197,7 @@ public class SleepManager : MonoBehaviour
             whiteScreen.color = new Color(1, 0, 0, t);
             yield return null;
         }
-
+        textCut.CutScene(textCut.Failed, true);
         yield return new WaitForSeconds(3f);
         oppaiManager.isTouch = false;
         gameoversprite.gameover();

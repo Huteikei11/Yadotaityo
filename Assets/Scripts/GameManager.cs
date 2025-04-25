@@ -24,15 +24,41 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Sprite[] semensprites; // スプライトを0,1,2の順に入れておく
     [SerializeField] private SpriteRenderer spriteRenderer;
 
+    [SerializeField] private TextCut textCut;
+    [SerializeField] private Animator loadAnim;
+    public float startTime = 2;//ゲーム開始までの時間
+
+
     private int difficulty;
+    private int loadNo;
 
     void Start()
     {
         //タイマースタート
-        timerController.StartTimer();
+
+        loadNo = loadManager.Instance != null ? loadManager.Instance.GetLoadNo() : 0;
+        switch (loadNo)
+        {
+            case 0:
+                loadAnim.SetTrigger("loadOutTrigger");
+                break;
+            case 1:
+                loadAnim.SetTrigger("loadGameoverTrigger");
+                break;
+        }
         difficulty = DifficultyManager.Instance != null ? DifficultyManager.Instance.GetDifficulty() : 0;
         spriteRenderer.enabled = false; // 最初は非表示
+        StartCoroutine(GameStart());
     }
+    private IEnumerator GameStart()
+    {
+        yield return new WaitForSeconds(startTime);
+        textCut.CutScene(textCut.Start, false);
+        yield return new WaitForSeconds(0.5f);
+        timerController.StartTimer(); //ゲーム開始までの処理
+        mune.gameObject.GetComponent<OppaiManager>().StartOppai();
+    }
+
     public void FinishGame()
     {
         timerController.StopTimerAndSave(difficulty);
@@ -54,6 +80,7 @@ public class GameManager : MonoBehaviour
 
         //ボタンを表示
         RetryButton.EnableButton();
+        RetryButton.clearFlags();
         exitButtonUI.EnableButton();
 
         // 4. クリアタイム表示
@@ -67,12 +94,12 @@ public class GameManager : MonoBehaviour
 
         // ホワイトアウト開始
         whiteScreen.gameObject.SetActive(true);
-        for (float t = 0; t < 1f; t += Time.deltaTime*3)
+        for (float t = 0; t < 1f; t += Time.deltaTime * 3)
         {
             whiteScreen.color = new Color(1, 1, 1, t);
             yield return null;
         }
-        mune.SetTrigger("Finish");//胸を止める
+        mune.SetBool("Finish", true);//胸を止める
 
         // ホワイトイン開始（画面を白からフェードアウト）
         for (float t = 1f; t > 0; t -= Time.deltaTime * 2)
@@ -102,7 +129,7 @@ public class GameManager : MonoBehaviour
         }
 
 
-        
+
         whiteScreen.gameObject.SetActive(false);
         yield return new WaitForSeconds(1f); // アニメーションの待機時間
     }

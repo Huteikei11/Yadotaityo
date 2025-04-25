@@ -16,6 +16,8 @@ public class OppaiManager : MonoBehaviour
     public Animator anim;
     [SerializeField] private Image whiteScreen;
 
+    [SerializeField] private OzyamaFall ozyamaFall;
+
     private void Start()
     {
         whoChara = DifficultyManager.Instance != null ? DifficultyManager.Instance.GetDifficulty() : 0;
@@ -23,6 +25,7 @@ public class OppaiManager : MonoBehaviour
     }
     void Update()
     {
+        anim.SetBool("fallBool", ozyamaFall.GetFallDuringBool());
         if (isTouch)
         {
             if (Input.GetMouseButtonDown(0))//左クリック
@@ -42,7 +45,10 @@ public class OppaiManager : MonoBehaviour
                 {
                     if (!isHolding)
                     {
-                        isHolding = true;
+                        if (!ozyamaFall.GetFallDuringBool())
+                        {
+                            isHolding = true;//お邪魔キャラ落下中新たにおっぱいを揉ませない
+                        }
                         OnHoldStart(); // 長押し開始時の処理
                     }
                     OnHolding(); // 長押し中の処理
@@ -79,7 +85,7 @@ public class OppaiManager : MonoBehaviour
 
     void OnHoldStart()
     {
-        anim.SetTrigger("Start");
+        anim.SetBool("Start", true);
         Debug.Log("長押し開始");
     }
 
@@ -92,6 +98,7 @@ public class OppaiManager : MonoBehaviour
 
     public void OnHoldEnd()
     {
+        anim.SetBool("Start", false);
         anim.SetTrigger("Close");
         Debug.Log("長押し終了");
     }
