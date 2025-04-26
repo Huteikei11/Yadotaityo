@@ -19,6 +19,7 @@ public class OzyamaFall : MonoBehaviour
     [SerializeField] EcstasyManager EcstasyManager;
 
     public bool isAllow = true;
+    bool fallDuring = false;
 
     // Inspector から編集可能な値
     [Header("ScheduleNextNoise の設定")]
@@ -82,6 +83,7 @@ public class OzyamaFall : MonoBehaviour
         anim.SetTrigger("Entry");
         if (motion == 1)
         {
+            fallDuring = true;
             StartCoroutine(WatchBool());
         }
     }
@@ -90,7 +92,6 @@ public class OzyamaFall : MonoBehaviour
     {
         // まず待つ
         yield return new WaitForSeconds(watchWaitTime);
-
         Debug.Log("監視開始（1秒間）");
 
         float timer = 0f;
@@ -98,7 +99,7 @@ public class OzyamaFall : MonoBehaviour
 
         while (timer < 0.1f)
         {
-            if (oppaiManager.isHolding || Input.GetMouseButton(0))
+            if (oppaiManager.isHolding)
             {
                 becameTrue = true;
             }
@@ -122,6 +123,10 @@ public class OzyamaFall : MonoBehaviour
         {
             Debug.Log("1秒間のうちにtargetBoolがtrueになりました！");
             StartCoroutine(Surprised());
+        }
+        if (isAllow)
+        {
+            fallDuring = false;
         }
     }
 
@@ -173,5 +178,14 @@ public class OzyamaFall : MonoBehaviour
     {
         float rand = Random.Range(0f, 100f);
         return rand < chanceForOne ? 1 : 0;
+    }
+
+    public bool GetFallDuringBool()
+    {
+        return fallDuring;
+    }
+    public void SetFallDuringBool(bool a)
+    {
+        fallDuring = a;
     }
 }

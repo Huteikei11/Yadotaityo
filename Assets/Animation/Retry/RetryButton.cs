@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -9,6 +10,9 @@ public class RetryButton : MonoBehaviour
     private SpriteRenderer spriteRenderer; // スプライトを非表示にする用
 
     [SerializeField] private ExitButtonUI exitButtonUI;
+    [SerializeField] private Animator loadAnim; 
+
+    private bool ClearFlags = false;
 
     void Start()
     {
@@ -66,8 +70,27 @@ public class RetryButton : MonoBehaviour
     //リトライボタンの中身
     private void Action()
     {
-        SceneManager.LoadScene("Main");
+        StartCoroutine(GameLoad());
     }
+
+    private IEnumerator GameLoad()
+    {
+
+        if (ClearFlags == false)
+        {
+            loadAnim.SetTrigger("loadGameoverTrigger");
+            loadManager.Instance.StartGame("Main", 1);
+        }
+        else
+        {
+            loadAnim.SetTrigger("loadInTrigger");
+            yield return new WaitForSeconds(0.01f);//animatorが反映されるまでの緩衝時間
+           
+            yield return new WaitForSeconds(loadAnim.GetCurrentAnimatorStateInfo(0).length);
+            loadManager.Instance.StartGame("Main", 0);
+        }
+    }
+
 
     private void CloseButton()
     {
@@ -77,5 +100,10 @@ public class RetryButton : MonoBehaviour
     {
         animator.SetTrigger("isMoved");
         Invoke("DisableButton", 0.5f);
+    }
+
+    public void clearFlags()
+    {
+        ClearFlags = true;
     }
 }
