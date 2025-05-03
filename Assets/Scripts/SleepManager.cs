@@ -42,8 +42,15 @@ public class SleepManager : MonoBehaviour
 
     void Start()
     {
+        // whiteScreen ÇÃèâä˙âªÇã≠êß
+        if (whiteScreen != null)
+        {
+            whiteScreen.color = new Color(134 / 255f, 0, 142 / 255f, 90 / 255f);
+            Debug.Log($"whiteScreen initialized to: {whiteScreen.color}");
+        }
         who = DifficultyManager.Instance != null ? DifficultyManager.Instance.GetDifficulty() : 0;
         anim.SetInteger("difficult", who);
+
         StartFace();
     }
 
@@ -187,14 +194,9 @@ public class SleepManager : MonoBehaviour
     {
         OzyamaFall.isAllow = false;
 
-        whiteScreen.color = new Color(1, 0, 0, 40 / 255f);
-        yield return new WaitForSeconds(0.2f);
-        whiteScreen.color = new Color(0, 0, 0, 40 / 255f);
-        yield return new WaitForSeconds(1f);
-
-        for (float t = 0; t < 100 / 255f; t += Time.deltaTime / 5)
+        for (float t = 50/255; t >= 0; t -= Time.deltaTime/4)
         {
-            whiteScreen.color = new Color(1, 0, 0, t);
+            whiteScreen.color = new Color(whiteScreen.color.r, whiteScreen.color.g, whiteScreen.color.b, t);
             yield return null;
         }
         textCut.CutScene(textCut.Failed, true);

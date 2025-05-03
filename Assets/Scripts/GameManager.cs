@@ -52,9 +52,13 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator GameStart()
     {
+        //こいしのスタートのトランジションと文字
         yield return new WaitForSeconds(startTime);
         textCut.CutScene(textCut.Start, false);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.5f);
+        //胸を開く
+        mune.SetTrigger("Open");
+
         timerController.StartTimer(); //ゲーム開始までの処理
         mune.gameObject.GetComponent<OppaiManager>().StartOppai();
     }
