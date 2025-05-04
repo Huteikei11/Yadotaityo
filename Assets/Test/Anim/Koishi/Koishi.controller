@@ -452,6 +452,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: fallBool
     m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: difficult
+    m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2214039416889057940}
   m_Solo: 0
@@ -621,6 +624,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: fallBool
     m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: difficult
+    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3319461318346185825}
   m_Solo: 0
@@ -1033,6 +1039,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: fallBool
+    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: difficult
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6364641192022551088}
