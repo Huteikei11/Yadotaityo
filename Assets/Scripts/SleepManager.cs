@@ -195,13 +195,11 @@ public class SleepManager : MonoBehaviour
     IEnumerator Failed()
     {
         OzyamaFall.isAllow = false;
+        oppaiManager.StopOppai();
 
-        for (float t = 50; t >= 0; t -= Time.deltaTime/10)
-        {
-            whiteScreen.color = new Color(whiteScreen.color.r, whiteScreen.color.g, whiteScreen.color.b, t/255);
-            yield return null;
-        }
-        yield return new WaitForSeconds(3f);// 4秒待つ
+        StartCoroutine(FadeOut());
+
+        yield return new WaitForSeconds(2f);// 4秒待つ
         textCut.CutScene(textCut.Failed, true);
         yield return new WaitForSeconds(2f);// 3秒待つ
         oppaiManager.isTouch = false;
@@ -218,5 +216,25 @@ public class SleepManager : MonoBehaviour
         {
             WakeUpChara(); // おはようございます
         }
+    }
+
+    IEnumerator FadeOut()
+    {
+        float startAlpha = 50f; // 初期アルファ値 (0~255 の範囲)
+        float duration = 5f; // フェードアウトにかける時間（秒）
+        float elapsed = 0f; // 経過時間
+
+        // duration 秒間かけてフェードアウト
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime; // 経過時間を加算
+            float alpha = Mathf.Lerp(startAlpha, 0f, elapsed / duration); // アルファ値を補間 (0~255 の範囲)
+            float normalizedAlpha = alpha / 255f; // 0~1 の範囲に変換
+            whiteScreen.color = new Color(whiteScreen.color.r, whiteScreen.color.g, whiteScreen.color.b, normalizedAlpha); // 色を更新
+            yield return 3f; // 次のフレームまで待機
+        }
+
+        // 最後に完全に透明に設定
+        whiteScreen.color = new Color(whiteScreen.color.r, whiteScreen.color.g, whiteScreen.color.b, 0f);
     }
 }
