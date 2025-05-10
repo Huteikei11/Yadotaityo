@@ -168,7 +168,7 @@ public class SleepManager : MonoBehaviour
         bool becameTrue = false;
         while (timer < wakeUpDuration) // 起きたままの時間を比較
         {
-            if (oppaiManager.isHolding)
+            if (oppaiManager.isHolding || OzyamaFall.GetSurprisedBool())//つかむかお邪魔にひっかかったか
             {
                 becameTrue = true;
                 break;
