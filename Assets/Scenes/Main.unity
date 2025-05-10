@@ -3183,6 +3183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ecstacyGage: 0
+  adjustEcstacyGage: 100
   gameManager: {fileID: 255917940}
   OzyamaFall: {fileID: 695366417}
   isAllowCal: 1
