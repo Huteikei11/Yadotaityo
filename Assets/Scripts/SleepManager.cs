@@ -15,34 +15,34 @@ public class SleepManager : MonoBehaviour
     public Animator oppai;
     public Animator gameover;
 
-    [SerializeField] private Image whiteScreen; // ƒzƒƒCƒgƒAƒEƒgEƒzƒƒCƒgƒCƒ“—p‚ÌƒCƒ[ƒW
+    [SerializeField] private Image whiteScreen; // ãƒ›ãƒ¯ã‚¤ãƒˆã‚¢ã‚¦ãƒˆãƒ»ãƒ›ãƒ¯ã‚¤ãƒˆã‚¤ãƒ³ç”¨ã®ã‚¤ãƒ¡ãƒ¼ã‚¸
     [SerializeField] private RetryButton RetryButton;
     [SerializeField] private ExitButtonUI exitButtonUI;
     [SerializeField] private OzyamaFall OzyamaFall;
     [SerializeField] private GameoverSprite gameoversprite;
     [SerializeField] private TextCut textCut;
 
-    // Inspector ‚©‚ç•ÒW‰Â”\‚È’l
-    [Header("‚¨‹ó (okuu) ‚Ì‡–°“x‘‰Á’l")]
+    // Inspector ã‹ã‚‰ç·¨é›†å¯èƒ½ãªå€¤
+    [Header("ãŠç©º (okuu) ã®ç¡çœ åº¦å¢—åŠ å€¤")]
     public float[] okuuAddPoints = { 0.01f, 0.015f, 0.02f, 0.04f, 0.05f };
 
-    [Header("‚¨‚è‚ñ (orin) ‚Ì‡–°“x‘‰Á’l")]
+    [Header("ãŠã‚Šã‚“ (orin) ã®ç¡çœ åº¦å¢—åŠ å€¤")]
     public float[] orinAddPoints = { 0.01f, 0.02f, 0.03f, 0.05f, 0.07f };
 
-    [Header("‚³‚Æ‚è (satori) ‚Ì‡–°“x‘‰Á’l")]
+    [Header("ã•ã¨ã‚Š (satori) ã®ç¡çœ åº¦å¢—åŠ å€¤")]
     public float[] satoriAddPoints = { 0.002f, 0.03f, 0.04f, 0.06f, 0.08f };
 
-    [Header("PlusSleepDeepNotHolding ‚Ìİ’è")]
-    [SerializeField] private float finalStageIncrease = 0.03f; // ÅI’iŠKˆÈã‚Å‘‰Á‚·‚é’l
-    [SerializeField] private float halfStageIncrease = 0.02f;  // ”¼•ªˆÈã‚Å‘‰Á‚·‚é’l
-    [SerializeField] private float belowHalfDecrease = -0.002f; // ”¼•ªˆÈ‰º‚ÅŒ¸­‚·‚é’l
+    [Header("PlusSleepDeepNotHolding ã®è¨­å®š")]
+    [SerializeField] private float finalStageIncrease = 0.03f; // æœ€çµ‚æ®µéšä»¥ä¸Šã§å¢—åŠ ã™ã‚‹å€¤
+    [SerializeField] private float halfStageIncrease = 0.02f;  // åŠåˆ†ä»¥ä¸Šã§å¢—åŠ ã™ã‚‹å€¤
+    [SerializeField] private float belowHalfDecrease = -0.002f; // åŠåˆ†ä»¥ä¸‹ã§æ¸›å°‘ã™ã‚‹å€¤
 
-    [Header("WatchBool ‚Ìİ’è")]
-    [SerializeField] private float wakeUpDuration = 3f; // ‹N‚«‚½‚Ü‚Ü‚Å‚¢‚éŠÔ
+    [Header("WatchBool ã®è¨­å®š")]
+    [SerializeField] private float wakeUpDuration = 3f; // èµ·ããŸã¾ã¾ã§ã„ã‚‹æ™‚é–“
 
     void Start()
     {
-        // whiteScreen ‚Ì‰Šú‰»‚ğ‹­§
+        // whiteScreen ã®åˆæœŸåŒ–ã‚’å¼·åˆ¶
         if (whiteScreen != null)
         {
             whiteScreen.color = new Color(134 / 255f, 0, 142 / 255f, 90 / 255f);
@@ -54,7 +54,7 @@ public class SleepManager : MonoBehaviour
         StartFace();
     }
 
-    public void StartFace() // Šç‚Ì’èŠúXV‚ğ‚·‚é
+    public void StartFace() // é¡”ã®å®šæœŸæ›´æ–°ã‚’ã™ã‚‹
     {
         faceCoroutine = StartCoroutine(FaceMethod());
     }
@@ -68,7 +68,7 @@ public class SleepManager : MonoBehaviour
         }
     }
 
-    IEnumerator FaceMethod() // Šç‚Ì’èŠúXV‚·‚é’†g
+    IEnumerator FaceMethod() // é¡”ã®å®šæœŸæ›´æ–°ã™ã‚‹ä¸­èº«
     {
         while (true)
         {
@@ -98,22 +98,22 @@ public class SleepManager : MonoBehaviour
         }
     }
 
-    public void CalSleepDeepOppai(int pattern, int who) // ‡–°“x‚ğ‚¨‚Á‚Ï‚¢‚Å‘«‚·
+    public void CalSleepDeepOppai(int pattern, int who) // ç¡çœ åº¦ã‚’ãŠã£ã±ã„ã§è¶³ã™
     {
         float addpoint = 0;
         switch (who)
         {
-            case 0: // ‚¨‹ó (okuu)
+            case 0: // ãŠç©º (okuu)
                 if (pattern >= 0 && pattern < okuuAddPoints.Length)
                     addpoint = okuuAddPoints[pattern];
                 break;
 
-            case 1: // ‚¨‚è‚ñ (orin)
+            case 1: // ãŠã‚Šã‚“ (orin)
                 if (pattern >= 0 && pattern < orinAddPoints.Length)
                     addpoint = orinAddPoints[pattern];
                 break;
 
-            case 2: // ‚³‚Æ‚è (satori)
+            case 2: // ã•ã¨ã‚Š (satori)
                 if (pattern >= 0 && pattern < satoriAddPoints.Length)
                     addpoint = satoriAddPoints[pattern];
                 break;
@@ -121,33 +121,33 @@ public class SleepManager : MonoBehaviour
         AddSleepDeep(addpoint);
     }
 
-    public void PlusSleepDeepFallObj(float value) // ‚à‚Ì‚ª—‚¿‚Ä‚«‚½‚Æ‚«‚É‡–°“x‚ğ‘«‚·
+    public void PlusSleepDeepFallObj(float value) // ã‚‚ã®ãŒè½ã¡ã¦ããŸã¨ãã«ç¡çœ åº¦ã‚’è¶³ã™
     {
         AddSleepDeep(value);
     }
 
-    public void PlusSleepDeepNotHolding() // ‚¨‚Á‚Ï‚¢‚ÉG‚ê‚Ä‚¢‚È‚¢‚Æ‚«
+    public void PlusSleepDeepNotHolding() // ãŠã£ã±ã„ã«è§¦ã‚Œã¦ã„ãªã„ã¨ã
     {
         float addpoint = 0;
         if (sleepDeep >= (wakeup / 1.1))
         {
-            addpoint += finalStageIncrease; // ÅI’iŠKˆÈã‚Å‚³‚ç‚É‘‰Á
+            addpoint += finalStageIncrease; // æœ€çµ‚æ®µéšä»¥ä¸Šã§ã•ã‚‰ã«å¢—åŠ 
         }
         else if (sleepDeep >= 50)
         {
-            addpoint += halfStageIncrease; // ‡–°ƒQ[ƒW‚ª”¼•ªˆÈã‚Å‘‰Á
+            addpoint += halfStageIncrease; // ç¡çœ ã‚²ãƒ¼ã‚¸ãŒåŠåˆ†ä»¥ä¸Šã§å¢—åŠ 
         }
         else
         {
-            addpoint += belowHalfDecrease; // ‡–°ƒQ[ƒW‚ª”¼•ªˆÈ‰º‚ÅŒ¸­
+            addpoint += belowHalfDecrease; // ç¡çœ ã‚²ãƒ¼ã‚¸ãŒåŠåˆ†ä»¥ä¸‹ã§æ¸›å°‘
         }
         AddSleepDeep(addpoint);
     }
 
-    public void WakeUpChara() // ƒLƒƒƒ‰ƒNƒ^[‚ª‹N‚«‚é‚Ìˆ—
+    public void WakeUpChara() // ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ãŒèµ·ãã‚‹æ™‚ã®å‡¦ç†
     {
         OzyamaFall.isAllow = false;
-        Debug.Log("‚¨‚«‚½");
+        Debug.Log("ãŠããŸ");
         sleepDeep = 0;
         StartCoroutine(WatchBool());
 
@@ -157,16 +157,16 @@ public class SleepManager : MonoBehaviour
     {
         OzyamaFall.SetFallDuringBool(true);
         // OzyamaFall.anim.SetBool("fallBool", OzyamaFall.GetFallDuringBool());
-        // ‚â‚Ç‚½‚¢‚¿‚å‚¤‚³‚ñ‚É‚Â‚¢‚©‚µ‚Ä‚à‚ç‚Á‚½‚¯‚ÇQÆæ‚ÌƒAƒjƒ[ƒ^‚ª‚½‚Ô‚ñˆá‚¤B
-        // ‚Ç‚¤ì—p‚·‚é‚©‰ğ‚ç‚È‚¢‚Ì‚ÅƒRƒƒ“ƒgƒAƒEƒg‚µ‚Ä‚¨‚­
+
+        // å‚ç…§å…ˆã«å­˜åœ¨ã—ã¦ã„ãªã„ã®ã§ã¨ã‚Šã‚ãˆãšã‚³ãƒ¡ãƒ³ãƒˆã‚¢ã‚¦ãƒˆ
         anim.SetTrigger("up");
         yield return new WaitForSeconds(0.4f);
 
-        Debug.Log("ŠÄ‹ŠJn");
+        Debug.Log("ç›£è¦–é–‹å§‹");
 
         float timer = 0f;
         bool becameTrue = false;
-        while (timer < wakeUpDuration) // ‹N‚«‚½‚Ü‚Ü‚ÌŠÔ‚ğ”äŠr
+        while (timer < wakeUpDuration) // èµ·ããŸã¾ã¾ã®æ™‚é–“ã‚’æ¯”è¼ƒ
         {
             if (oppaiManager.isHolding)
             {
@@ -179,15 +179,18 @@ public class SleepManager : MonoBehaviour
 
         if (!becameTrue)
         {
-            Debug.Log("1•bŠÔAtargetBool‚Íˆê“x‚àtrue‚É‚È‚è‚Ü‚¹‚ñ‚Å‚µ‚½I");
+            Debug.Log("1ç§’é–“ã€targetBoolã¯ä¸€åº¦ã‚‚trueã«ãªã‚Šã¾ã›ã‚“ã§ã—ãŸï¼");
             OzyamaFall.isAllow = true;
             anim.SetTrigger("Sleep");
             OzyamaFall.SetFallDuringBool(false);
-            //OzyamaFall.anim.SetBool("fallBool", OzyamaFall.GetFallDuringBool());
+
+
+            // OzyamaFall.anim.SetBool("fallBool", OzyamaFall.GetFallDuringBool());
+            // å‚ç…§å…ˆã«å­˜åœ¨ã—ã¦ã„ãªã„ã®ã§ã¨ã‚Šã‚ãˆãšã‚³ãƒ¡ãƒ³ãƒˆã‚¢ã‚¦ãƒˆ
         }
         else
         {
-            Debug.Log("1•bŠÔ‚Ì‚¤‚¿‚ÉtargetBool‚ªtrue‚É‚È‚è‚Ü‚µ‚½I");
+            Debug.Log("1ç§’é–“ã®ã†ã¡ã«targetBoolãŒtrueã«ãªã‚Šã¾ã—ãŸï¼");
             StartCoroutine(Failed());
         }
     }
@@ -199,9 +202,9 @@ public class SleepManager : MonoBehaviour
 
         StartCoroutine(FadeOut());
 
-        yield return new WaitForSeconds(2f);// 4•b‘Ò‚Â
+        yield return new WaitForSeconds(2f);// 4ç§’å¾…ã¤
         textCut.CutScene(textCut.Failed, true);
-        yield return new WaitForSeconds(2f);// 3•b‘Ò‚Â
+        yield return new WaitForSeconds(2f);// 3ç§’å¾…ã¤
         oppaiManager.isTouch = false;
         gameoversprite.gameover();
 
@@ -209,32 +212,32 @@ public class SleepManager : MonoBehaviour
         exitButtonUI.EnableButton();
     }
 
-    private void AddSleepDeep(float value) // ’¼Ú‡–°“x‚ğ‘«‚µ‹N‚«‚é‚©”»’è
+    private void AddSleepDeep(float value) // ç›´æ¥ç¡çœ åº¦ã‚’è¶³ã—èµ·ãã‚‹ã‹åˆ¤å®š
     {
         sleepDeep = Mathf.Clamp(sleepDeep + value, 0, wakeup);
         if (sleepDeep == wakeup)
         {
-            WakeUpChara(); // ‚¨‚Í‚æ‚¤‚²‚´‚¢‚Ü‚·
+            WakeUpChara(); // ãŠã¯ã‚ˆã†ã”ã–ã„ã¾ã™
         }
     }
 
     IEnumerator FadeOut()
     {
-        float startAlpha = 50f; // ‰ŠúƒAƒ‹ƒtƒ@’l (0~255 ‚Ì”ÍˆÍ)
-        float duration = 5f; // ƒtƒF[ƒhƒAƒEƒg‚É‚©‚¯‚éŠÔi•bj
-        float elapsed = 0f; // Œo‰ßŠÔ
+        float startAlpha = 50f; // åˆæœŸã‚¢ãƒ«ãƒ•ã‚¡å€¤ (0~255 ã®ç¯„å›²)
+        float duration = 5f; // ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆã«ã‹ã‘ã‚‹æ™‚é–“ï¼ˆç§’ï¼‰
+        float elapsed = 0f; // çµŒéæ™‚é–“
 
-        // duration •bŠÔ‚©‚¯‚ÄƒtƒF[ƒhƒAƒEƒg
+        // duration ç§’é–“ã‹ã‘ã¦ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆ
         while (elapsed < duration)
         {
-            elapsed += Time.deltaTime; // Œo‰ßŠÔ‚ğ‰ÁZ
-            float alpha = Mathf.Lerp(startAlpha, 0f, elapsed / duration); // ƒAƒ‹ƒtƒ@’l‚ğ•âŠÔ (0~255 ‚Ì”ÍˆÍ)
-            float normalizedAlpha = alpha / 255f; // 0~1 ‚Ì”ÍˆÍ‚É•ÏŠ·
-            whiteScreen.color = new Color(whiteScreen.color.r, whiteScreen.color.g, whiteScreen.color.b, normalizedAlpha); // F‚ğXV
-            yield return 3f; // Ÿ‚ÌƒtƒŒ[ƒ€‚Ü‚Å‘Ò‹@
+            elapsed += Time.deltaTime; // çµŒéæ™‚é–“ã‚’åŠ ç®—
+            float alpha = Mathf.Lerp(startAlpha, 0f, elapsed / duration); // ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã‚’è£œé–“ (0~255 ã®ç¯„å›²)
+            float normalizedAlpha = alpha / 255f; // 0~1 ã®ç¯„å›²ã«å¤‰æ›
+            whiteScreen.color = new Color(whiteScreen.color.r, whiteScreen.color.g, whiteScreen.color.b, normalizedAlpha); // è‰²ã‚’æ›´æ–°
+            yield return 3f; // æ¬¡ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã¾ã§å¾…æ©Ÿ
         }
 
-        // ÅŒã‚ÉŠ®‘S‚É“§–¾‚Éİ’è
+        // æœ€å¾Œã«å®Œå…¨ã«é€æ˜ã«è¨­å®š
         whiteScreen.color = new Color(whiteScreen.color.r, whiteScreen.color.g, whiteScreen.color.b, 0f);
     }
 }
