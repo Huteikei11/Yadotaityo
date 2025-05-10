@@ -156,7 +156,9 @@ public class SleepManager : MonoBehaviour
     IEnumerator WatchBool()
     {
         OzyamaFall.SetFallDuringBool(true);
-        OzyamaFall.anim.SetBool("fallBool", OzyamaFall.GetFallDuringBool());
+        // OzyamaFall.anim.SetBool("fallBool", OzyamaFall.GetFallDuringBool());
+        // やどたいちょうさんについかしてもらったけど参照先のアニメータがたぶん違う。
+        // どう作用するか解らないのでコメントアウトしておく
         anim.SetTrigger("up");
         yield return new WaitForSeconds(0.4f);
 
@@ -181,7 +183,7 @@ public class SleepManager : MonoBehaviour
             OzyamaFall.isAllow = true;
             anim.SetTrigger("Sleep");
             OzyamaFall.SetFallDuringBool(false);
-            OzyamaFall.anim.SetBool("fallBool", OzyamaFall.GetFallDuringBool());
+            //OzyamaFall.anim.SetBool("fallBool", OzyamaFall.GetFallDuringBool());
         }
         else
         {
@@ -194,13 +196,14 @@ public class SleepManager : MonoBehaviour
     {
         OzyamaFall.isAllow = false;
 
-        for (float t = 50/255; t >= 0; t -= Time.deltaTime/4)
+        for (float t = 50; t >= 0; t -= Time.deltaTime/10)
         {
-            whiteScreen.color = new Color(whiteScreen.color.r, whiteScreen.color.g, whiteScreen.color.b, t);
+            whiteScreen.color = new Color(whiteScreen.color.r, whiteScreen.color.g, whiteScreen.color.b, t/255);
             yield return null;
         }
+        yield return new WaitForSeconds(3f);// 4秒待つ
         textCut.CutScene(textCut.Failed, true);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);// 3秒待つ
         oppaiManager.isTouch = false;
         gameoversprite.gameover();
 

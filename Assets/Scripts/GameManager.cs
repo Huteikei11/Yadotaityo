@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private TextCut textCut;
     [SerializeField] private Animator loadAnim;
+    [SerializeField] private OppaiManager oppaiManager;
+
     public float startTime = 2;//ゲーム開始までの時間
 
 
@@ -59,8 +61,9 @@ public class GameManager : MonoBehaviour
         //胸を開く
         mune.SetTrigger("Open");
 
+        yield return new WaitForSeconds(1.5f);
         timerController.StartTimer(); //ゲーム開始までの処理
-        mune.gameObject.GetComponent<OppaiManager>().StartOppai();
+        oppaiManager.StartOppai();
     }
 
     public void FinishGame()
