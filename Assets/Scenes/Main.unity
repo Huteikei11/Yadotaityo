@@ -216,6 +216,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 298973497}
   - {fileID: 1666002982}
   - {fileID: 298973497}
   m_Father: {fileID: 0}
@@ -2981,7 +2982,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2540798524357510358, guid: 456ea414d68444d4fbc3ccd274932a41, type: 3}
       propertyPath: m_Name
-      value: load
+      value: "load(\u8D77\u52D5\u6642\u306F\u6709\u52B9\u306B)"
       objectReference: {fileID: 0}
     - target: {fileID: 2540798524357510358, guid: 456ea414d68444d4fbc3ccd274932a41, type: 3}
       propertyPath: m_IsActive
