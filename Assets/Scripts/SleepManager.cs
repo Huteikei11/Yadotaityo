@@ -156,7 +156,8 @@ public class SleepManager : MonoBehaviour
     IEnumerator WatchBool()
     {
         OzyamaFall.SetFallDuringBool(true);
-        OzyamaFall.anim.SetBool("fallBool", OzyamaFall.GetFallDuringBool());
+        // OzyamaFall.anim.SetBool("fallBool", OzyamaFall.GetFallDuringBool());
+        // 参照先に存在していないのでとりあえずコメントアウト
         anim.SetTrigger("up");
         yield return new WaitForSeconds(0.4f);
 
@@ -181,7 +182,8 @@ public class SleepManager : MonoBehaviour
             OzyamaFall.isAllow = true;
             anim.SetTrigger("Sleep");
             OzyamaFall.SetFallDuringBool(false);
-            OzyamaFall.anim.SetBool("fallBool", OzyamaFall.GetFallDuringBool());
+            // OzyamaFall.anim.SetBool("fallBool", OzyamaFall.GetFallDuringBool());
+            // 参照先に存在していないのでとりあえずコメントアウト
         }
         else
         {

@@ -217,6 +217,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1666002982}
+  - {fileID: 298973497}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1004,6 +1005,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 1911631431}
   textCut: {fileID: 1608313007}
   loadAnim: {fileID: 1510400633}
+  oppaiManager: {fileID: 711218557}
   startTime: 2
 --- !u!1 &267840473
 GameObject:
@@ -1208,12 +1210,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 298973496}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 653177606}
+  m_Father: {fileID: 16520271}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2665,7 +2667,6 @@ RectTransform:
   - {fileID: 1608313006}
   - {fileID: 1804280365}
   - {fileID: 795969776}
-  - {fileID: 298973497}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2984,7 +2985,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2540798524357510358, guid: 456ea414d68444d4fbc3ccd274932a41, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6043600660910191487, guid: 456ea414d68444d4fbc3ccd274932a41, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3092,7 +3093,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00e8365d21590154497c95834e068b8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTouch: 1
+  isTouch: 0
   isHolding: 0
   holdThreshold: 0
   animePattern: 0
