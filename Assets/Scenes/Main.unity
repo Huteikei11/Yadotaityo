@@ -3029,6 +3029,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6141149119899936003, guid: 456ea414d68444d4fbc3ccd274932a41, type: 3}
+      propertyPath: m_UpdateMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7070369859412800949, guid: 456ea414d68444d4fbc3ccd274932a41, type: 3}
       propertyPath: m_Size.x
       value: 9.6
@@ -3063,6 +3067,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2540798524357510358, guid: 456ea414d68444d4fbc3ccd274932a41, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1159335670}
+    - targetCorrespondingSourceObject: {fileID: 2540798524357510358, guid: 456ea414d68444d4fbc3ccd274932a41, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1159335672}
   m_SourcePrefab: {fileID: 100100000, guid: 456ea414d68444d4fbc3ccd274932a41, type: 3}
 --- !u!1 &711218556
 GameObject:
@@ -4494,6 +4501,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1159335672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159335668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf40ee08cd7c9e54599aeda67cf14b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1165202221
 GameObject:
   m_ObjectHideFlags: 0

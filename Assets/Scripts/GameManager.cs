@@ -37,8 +37,21 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        //タイマースタート
+        // コルーチンを呼び出して1フレーム遅延させる
+        StartCoroutine(DelayedLoadAnimation());
 
+        //タイマースタート
+        difficulty = DifficultyManager.Instance != null ? DifficultyManager.Instance.GetDifficulty() : 0;
+        spriteRenderer.enabled = false; // 最初は非表示
+        StartCoroutine(GameStart());
+    }
+
+    private IEnumerator DelayedLoadAnimation()
+    {
+        // 1フレーム待機
+        yield return null;
+
+        // loadNo の値に基づいてアニメーションを設定
         loadNo = loadManager.Instance != null ? loadManager.Instance.GetLoadNo() : 0;
         switch (loadNo)
         {
@@ -49,9 +62,6 @@ public class GameManager : MonoBehaviour
                 loadAnim.SetTrigger("loadGameoverTrigger");
                 break;
         }
-        difficulty = DifficultyManager.Instance != null ? DifficultyManager.Instance.GetDifficulty() : 0;
-        spriteRenderer.enabled = false; // 最初は非表示
-        StartCoroutine(GameStart());
     }
     private IEnumerator GameStart()
     {
