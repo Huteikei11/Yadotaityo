@@ -9,6 +9,7 @@ public class SleepManager : MonoBehaviour
     private int who;
     public float wakeup;
     public int facePattern;
+    public float sleepDeepAdjust;
     public OppaiManager oppaiManager;
     private Coroutine faceCoroutine;
     public Animator anim;
@@ -212,9 +213,15 @@ public class SleepManager : MonoBehaviour
         exitButtonUI.EnableButton();
     }
 
-    private void AddSleepDeep(float value) // 直接睡眠度を足し起きるか判定
+    private void AddSleepDeep(float value)
     {
-        sleepDeep = Mathf.Clamp(sleepDeep + value, 0, wakeup);
+        // フレームレートに依存しないように Time.deltaTime を掛ける
+        float adjustedValue = value * Time.deltaTime*sleepDeepAdjust;
+
+        // sleepDeep の値を更新し、範囲を制限
+        sleepDeep = Mathf.Clamp(sleepDeep + adjustedValue, 0, wakeup);
+
+        // 最大値に達した場合、WakeUpChara を呼び出す
         if (sleepDeep == wakeup)
         {
             WakeUpChara(); // おはようございます

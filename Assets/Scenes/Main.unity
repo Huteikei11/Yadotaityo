@@ -3145,6 +3145,7 @@ MonoBehaviour:
   sleepDeep: 0
   wakeup: 100
   facePattern: 0
+  sleepDeepAdjust: 200
   oppaiManager: {fileID: 711218557}
   anim: {fileID: 2047185926}
   oppai: {fileID: 1935857546}
