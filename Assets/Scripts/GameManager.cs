@@ -6,14 +6,14 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private Image whiteScreen; // ƒzƒƒCƒgƒAƒEƒgEƒzƒƒCƒgƒCƒ“—p‚ÌƒCƒ[ƒW
-    [SerializeField] private SpriteRenderer KoishiCutIn; // ‚±‚¢‚µ‚ÌƒJƒbƒgƒCƒ“
-    [SerializeField] private Animator cutInAnimator; // ƒJƒbƒgƒCƒ“ƒAƒjƒ[ƒVƒ‡ƒ“—p‚ÌƒAƒjƒ[ƒ^[
-    [SerializeField] private Animator mune; // ‹¹‚ÌƒAƒjƒ[ƒ^[
-    public List<RectTransform> uiScreens; // UI ‚Ì RectTransform
-    public List<Transform> sprites; // ƒXƒvƒ‰ƒCƒg‚Ì Transform
-    [SerializeField] private TextMeshProUGUI clearTimeText; // ƒNƒŠƒAƒ^ƒCƒ€‚ğ•\¦‚·‚éƒeƒLƒXƒg
-    [SerializeField] private List<GameObject> hidegameObjects; // ƒQ[ƒ€“à‚ÌƒIƒuƒWƒFƒNƒgƒŠƒXƒg
+    [SerializeField] private Image whiteScreen; // ãƒ›ãƒ¯ã‚¤ãƒˆã‚¢ã‚¦ãƒˆãƒ»ãƒ›ãƒ¯ã‚¤ãƒˆã‚¤ãƒ³ç”¨ã®ã‚¤ãƒ¡ãƒ¼ã‚¸
+    [SerializeField] private SpriteRenderer KoishiCutIn; // ã“ã„ã—ã®ã‚«ãƒƒãƒˆã‚¤ãƒ³
+    [SerializeField] private Animator cutInAnimator; // ã‚«ãƒƒãƒˆã‚¤ãƒ³ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ç”¨ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚¿ãƒ¼
+    [SerializeField] private Animator mune; // èƒ¸ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚¿ãƒ¼
+    public List<RectTransform> uiScreens; // UI ã® RectTransform
+    public List<Transform> sprites; // ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã® Transform
+    [SerializeField] private TextMeshProUGUI clearTimeText; // ã‚¯ãƒªã‚¢ã‚¿ã‚¤ãƒ ã‚’è¡¨ç¤ºã™ã‚‹ãƒ†ã‚­ã‚¹ãƒˆ
+    [SerializeField] private List<GameObject> hidegameObjects; // ã‚²ãƒ¼ãƒ å†…ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒªã‚¹ãƒˆ
 
     [SerializeField] private TimerController timerController;
     [SerializeField] private HighScoreManager highScoreManager;
@@ -21,12 +21,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private RetryButton RetryButton;
     [SerializeField] private ExitButtonUI exitButtonUI;
 
-    [SerializeField] private Sprite[] semensprites; // ƒXƒvƒ‰ƒCƒg‚ğ0,1,2‚Ì‡‚É“ü‚ê‚Ä‚¨‚­
+    [SerializeField] private Sprite[] semensprites; // ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’0,1,2ã®é †ã«å…¥ã‚Œã¦ãŠã
     [SerializeField] private SpriteRenderer spriteRenderer;
 
     [SerializeField] private TextCut textCut;
     [SerializeField] private Animator loadAnim;
-    public float startTime = 2;//ƒQ[ƒ€ŠJn‚Ü‚Å‚ÌŠÔ
+
+    [SerializeField] private OppaiManager oppaiManager; // èƒ¸ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚¿ãƒ¼
+
+    public float startTime = 2;//ã‚²ãƒ¼ãƒ é–‹å§‹ã¾ã§ã®æ™‚é–“
 
 
     private int difficulty;
@@ -34,8 +37,21 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        //ƒ^ƒCƒ}[ƒXƒ^[ƒg
+        // ã‚³ãƒ«ãƒ¼ãƒãƒ³ã‚’å‘¼ã³å‡ºã—ã¦1ãƒ•ãƒ¬ãƒ¼ãƒ é…å»¶ã•ã›ã‚‹
+        StartCoroutine(DelayedLoadAnimation());
 
+        //ã‚¿ã‚¤ãƒãƒ¼ã‚¹ã‚¿ãƒ¼ãƒˆ
+        difficulty = DifficultyManager.Instance != null ? DifficultyManager.Instance.GetDifficulty() : 0;
+        spriteRenderer.enabled = false; // æœ€åˆã¯éè¡¨ç¤º
+        StartCoroutine(GameStart());
+    }
+
+    private IEnumerator DelayedLoadAnimation()
+    {
+        // 1ãƒ•ãƒ¬ãƒ¼ãƒ å¾…æ©Ÿ
+        yield return null;
+
+        // loadNo ã®å€¤ã«åŸºã¥ã„ã¦ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’è¨­å®š
         loadNo = loadManager.Instance != null ? loadManager.Instance.GetLoadNo() : 0;
         switch (loadNo)
         {
@@ -46,17 +62,19 @@ public class GameManager : MonoBehaviour
                 loadAnim.SetTrigger("loadGameoverTrigger");
                 break;
         }
-        difficulty = DifficultyManager.Instance != null ? DifficultyManager.Instance.GetDifficulty() : 0;
-        spriteRenderer.enabled = false; // Å‰‚Í”ñ•\¦
-        StartCoroutine(GameStart());
     }
     private IEnumerator GameStart()
     {
+        //ã“ã„ã—ã®ã‚¹ã‚¿ãƒ¼ãƒˆã®ãƒˆãƒ©ãƒ³ã‚¸ã‚·ãƒ§ãƒ³ã¨æ–‡å­—
         yield return new WaitForSeconds(startTime);
         textCut.CutScene(textCut.Start, false);
-        yield return new WaitForSeconds(0.5f);
-        timerController.StartTimer(); //ƒQ[ƒ€ŠJn‚Ü‚Å‚Ìˆ—
-        mune.gameObject.GetComponent<OppaiManager>().StartOppai();
+        yield return new WaitForSeconds(1.5f);
+        //èƒ¸ã‚’é–‹ã
+        mune.SetTrigger("Open");
+
+        yield return new WaitForSeconds(1.5f);
+        timerController.StartTimer(); //ã‚²ãƒ¼ãƒ é–‹å§‹ã¾ã§ã®å‡¦ç†
+        oppaiManager.StartOppai();
     }
 
     public void FinishGame()
@@ -69,47 +87,47 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator ResultSequence()
     {
-        // 1. ƒzƒƒCƒgƒAƒEƒg‚ÆƒJƒbƒgƒCƒ“‰‰o
+        // 1. ãƒ›ãƒ¯ã‚¤ãƒˆã‚¢ã‚¦ãƒˆã¨ã‚«ãƒƒãƒˆã‚¤ãƒ³æ¼”å‡º
         yield return StartCoroutine(FinishDirection());
 
-        // 2. ‰æ–ÊƒXƒNƒ[ƒ‹‰‰o
+        // 2. ç”»é¢ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«æ¼”å‡º
         yield return StartCoroutine(Scroll());
 
-        // 3. ƒQ[ƒ€‰æ–Ê‚ÌƒIƒuƒWƒFƒNƒg‚ğ”ñ•\¦‚É‚·‚é
+        // 3. ã‚²ãƒ¼ãƒ ç”»é¢ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’éè¡¨ç¤ºã«ã™ã‚‹
         HideGameObjects();
 
-        //ƒ{ƒ^ƒ“‚ğ•\¦
+        //ãƒœã‚¿ãƒ³ã‚’è¡¨ç¤º
         RetryButton.EnableButton();
         RetryButton.clearFlags();
         exitButtonUI.EnableButton();
 
-        // 4. ƒNƒŠƒAƒ^ƒCƒ€•\¦
+        // 4. ã‚¯ãƒªã‚¢ã‚¿ã‚¤ãƒ è¡¨ç¤º
         yield return StartCoroutine(ClearTime());
     }
 
     private IEnumerator FinishDirection()
     {
-        //yield return new WaitForSeconds(2f); // ƒAƒjƒ[ƒVƒ‡ƒ“‚Ì‘Ò‹@ŠÔ
+        //yield return new WaitForSeconds(2f); // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®å¾…æ©Ÿæ™‚é–“
 
 
-        // ƒzƒƒCƒgƒAƒEƒgŠJn
+        // ãƒ›ãƒ¯ã‚¤ãƒˆã‚¢ã‚¦ãƒˆé–‹å§‹
         whiteScreen.gameObject.SetActive(true);
         for (float t = 0; t < 1f; t += Time.deltaTime * 3)
         {
             whiteScreen.color = new Color(1, 1, 1, t);
             yield return null;
         }
-        mune.SetBool("Finish", true);//‹¹‚ğ~‚ß‚é
+        mune.SetBool("Finish", true);//èƒ¸ã‚’æ­¢ã‚ã‚‹
 
-        // ƒzƒƒCƒgƒCƒ“ŠJni‰æ–Ê‚ğ”’‚©‚çƒtƒF[ƒhƒAƒEƒgj
+        // ãƒ›ãƒ¯ã‚¤ãƒˆã‚¤ãƒ³é–‹å§‹ï¼ˆç”»é¢ã‚’ç™½ã‹ã‚‰ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆï¼‰
         for (float t = 1f; t > 0; t -= Time.deltaTime * 2)
         {
             whiteScreen.color = new Color(1, 1, 1, t);
             yield return null;
         }
-        // ƒJƒbƒgƒCƒ“ƒAƒjƒ[ƒVƒ‡ƒ“‚ğÄ¶
+        // ã‚«ãƒƒãƒˆã‚¤ãƒ³ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’å†ç”Ÿ
         cutInAnimator.SetTrigger("Show");
-        yield return new WaitForSeconds(2f); // ƒAƒjƒ[ƒVƒ‡ƒ“‚Ì‘Ò‹@ŠÔ
+        yield return new WaitForSeconds(2f); // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®å¾…æ©Ÿæ™‚é–“
 
 
         for (float t = 0; t < 1f; t += Time.deltaTime * 3)
@@ -118,9 +136,9 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
-        ShowSprite(difficulty);//¸‰t‚ª‚©‚©‚Á‚Ä‚¢‚é
+        ShowSprite(difficulty);//ç²¾æ¶²ãŒã‹ã‹ã£ã¦ã„ã‚‹
         cutInAnimator.SetTrigger("End");
-        // ƒzƒƒCƒgƒCƒ“ŠJni‰æ–Ê‚ğ”’‚©‚çƒtƒF[ƒhƒAƒEƒgj
+        // ãƒ›ãƒ¯ã‚¤ãƒˆã‚¤ãƒ³é–‹å§‹ï¼ˆç”»é¢ã‚’ç™½ã‹ã‚‰ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆï¼‰
         for (float t = 1f; t > 0; t -= Time.deltaTime * 2)
         {
             whiteScreen.color = new Color(1, 1, 1, t);
@@ -131,36 +149,36 @@ public class GameManager : MonoBehaviour
 
 
         whiteScreen.gameObject.SetActive(false);
-        yield return new WaitForSeconds(1f); // ƒAƒjƒ[ƒVƒ‡ƒ“‚Ì‘Ò‹@ŠÔ
+        yield return new WaitForSeconds(1f); // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®å¾…æ©Ÿæ™‚é–“
     }
 
     private void HideGameObjects()
     {
         foreach (GameObject obj in hidegameObjects)
         {
-            obj.SetActive(false); // ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğ”ñ•\¦
+            obj.SetActive(false); // ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’éè¡¨ç¤º
         }
     }
 
     private IEnumerator Scroll()
     {
-        float slideDistanceUI = 550f; // UI‚ÌƒXƒ‰ƒCƒh‹——£ianchoredPosition —pj
-        float slideDistanceSprite = 1.61f; // ƒXƒvƒ‰ƒCƒg‚ÌƒXƒ‰ƒCƒh‹——£iƒ[ƒ‹ƒhÀ•Wj
-        float duration = 1.5f; // ƒXƒ‰ƒCƒhŠÔ
+        float slideDistanceUI = 550f; // UIã®ã‚¹ãƒ©ã‚¤ãƒ‰è·é›¢ï¼ˆanchoredPosition ç”¨ï¼‰
+        float slideDistanceSprite = 1.61f; // ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ã‚¹ãƒ©ã‚¤ãƒ‰è·é›¢ï¼ˆãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ï¼‰
+        float duration = 1.5f; // ã‚¹ãƒ©ã‚¤ãƒ‰æ™‚é–“
         float time = 0;
         List<Vector2> startUIPositions = new List<Vector2>();
         List<Vector2> endUIPositions = new List<Vector2>();
         List<Vector3> startSpritePositions = new List<Vector3>();
         List<Vector3> endSpritePositions = new List<Vector3>();
 
-        // UI ‚ÌŠJnˆÊ’u‚ÆI—¹ˆÊ’u‚ğİ’è
+        // UI ã®é–‹å§‹ä½ç½®ã¨çµ‚äº†ä½ç½®ã‚’è¨­å®š
         foreach (var screen in uiScreens)
         {
             startUIPositions.Add(screen.anchoredPosition);
             endUIPositions.Add(screen.anchoredPosition + (Vector2.left * slideDistanceUI));
         }
 
-        // ƒXƒvƒ‰ƒCƒg‚ÌŠJnˆÊ’u‚ÆI—¹ˆÊ’u‚ğİ’è
+        // ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®é–‹å§‹ä½ç½®ã¨çµ‚äº†ä½ç½®ã‚’è¨­å®š
         foreach (var sprite in sprites)
         {
             startSpritePositions.Add(sprite.position);
@@ -172,13 +190,13 @@ public class GameManager : MonoBehaviour
             time += Time.deltaTime;
             float t = time / duration;
 
-            // UI ‚ğƒXƒ‰ƒCƒh
+            // UI ã‚’ã‚¹ãƒ©ã‚¤ãƒ‰
             for (int i = 0; i < uiScreens.Count; i++)
             {
                 uiScreens[i].anchoredPosition = Vector2.Lerp(startUIPositions[i], endUIPositions[i], t);
             }
 
-            // ƒXƒvƒ‰ƒCƒg‚ğƒXƒ‰ƒCƒh
+            // ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’ã‚¹ãƒ©ã‚¤ãƒ‰
             for (int i = 0; i < sprites.Count; i++)
             {
                 sprites[i].position = Vector3.Lerp(startSpritePositions[i], endSpritePositions[i], t);
@@ -187,7 +205,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
-        // ÅIˆÊ’u‚ğ•â³
+        // æœ€çµ‚ä½ç½®ã‚’è£œæ­£
         for (int i = 0; i < uiScreens.Count; i++)
         {
             uiScreens[i].anchoredPosition = endUIPositions[i];
@@ -201,14 +219,14 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator ClearTime()
     {
-        clearTimeText.text = ""; // ‰Šú‰»
+        clearTimeText.text = ""; // åˆæœŸåŒ–
         string timeStr = timerController.GetTimeString();
 
-        // 1•¶š‚¸‚Â•\¦‚·‚é
+        // 1æ–‡å­—ãšã¤è¡¨ç¤ºã™ã‚‹
         foreach (char c in timeStr)
         {
             clearTimeText.text += c;
-            yield return new WaitForSeconds(0.1f); // •¶š‚Ì•\¦ŠÔŠu
+            yield return new WaitForSeconds(0.1f); // æ–‡å­—ã®è¡¨ç¤ºé–“éš”
         }
     }
 
@@ -217,11 +235,11 @@ public class GameManager : MonoBehaviour
         if (mode >= 0 && mode < semensprites.Length)
         {
             spriteRenderer.sprite = semensprites[mode];
-            spriteRenderer.enabled = true; // •\¦
+            spriteRenderer.enabled = true; // è¡¨ç¤º
         }
         else
         {
-            Debug.LogWarning("•s³‚Èƒ‚[ƒh”Ô†‚Å‚·: " + mode);
+            Debug.LogWarning("ä¸æ­£ãªãƒ¢ãƒ¼ãƒ‰ç•ªå·ã§ã™: " + mode);
         }
     }
 }

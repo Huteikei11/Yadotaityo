@@ -20,6 +20,7 @@ public class OzyamaFall : MonoBehaviour
 
     public bool isAllow = true;
     bool fallDuring = false;
+    public bool isSurprised = false; //おじゃまに引っかかって操作できない間　
 
     // Inspector から編集可能な値
     [Header("ScheduleNextNoise の設定")]
@@ -133,8 +134,10 @@ public class OzyamaFall : MonoBehaviour
     IEnumerator Surprised()
     {
         EcstasyManager.isAllowCal = false;
+        isSurprised = true;
         yield return new WaitForSeconds(4f);
         oppai.speed = 1f;
+        isSurprised = false;
         EcstasyManager.isAllowCal = true;
     }
 
@@ -188,4 +191,9 @@ public class OzyamaFall : MonoBehaviour
     {
         fallDuring = a;
     }
+
+    public bool GetSurprisedBool()
+    {
+        return isSurprised;
+    }  
 }

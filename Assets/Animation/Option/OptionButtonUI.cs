@@ -19,8 +19,8 @@ public class OptionButtonUI : MonoBehaviour
     // ボタンを有効にする
     public void EnableButton()
     {
-        if (eventTrigger != null) eventTrigger.enabled = true;
-        if (spriteRenderer != null) spriteRenderer.enabled = true; // スプライトを表示
+        if (eventTrigger != null) eventTrigger.enabled = false;//本来はtrue　応急処置
+        if (spriteRenderer != null) spriteRenderer.enabled = false; // スプライトを表示
         animator.SetTrigger("Open");
     }
 
@@ -62,11 +62,7 @@ public class OptionButtonUI : MonoBehaviour
     //リトライボタンの中身
     private void Action()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
-#else
-    Application.Quit();//ゲームプレイ終了
-#endif
+
     }
 
     public void OnMove()

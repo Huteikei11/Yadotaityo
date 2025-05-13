@@ -5,6 +5,7 @@ using UnityEngine;
 public class EcstasyManager : MonoBehaviour
 {
     public float ecstacyGage;
+    public float adjustEcstacyGage;
     [SerializeField] private GameManager gameManager;
     private bool isEcstasy = false;
     [SerializeField] private OzyamaFall OzyamaFall;
@@ -56,7 +57,8 @@ public class EcstasyManager : MonoBehaviour
     {
         if (!isEcstasy) // 射精していたら100のまま
         {
-            ecstacyGage = Mathf.Clamp(ecstacyGage + delta, 0, 100);
+            // Time.deltaTime を掛けてフレームレートに依存しない増加量にする
+            ecstacyGage = Mathf.Clamp(ecstacyGage + delta * Time.deltaTime * adjustEcstacyGage, 0, 100);
             if (ecstacyGage >= 100) // 射精するか判定
             {
                 isEcstasy = true;
