@@ -125,7 +125,13 @@ public class GameManager : MonoBehaviour
             whiteScreen.color = new Color(1, 1, 1, t);
             yield return null;
         }
+<<<<<<< Updated upstream
         // ã‚«ãƒƒãƒˆã‚¤ãƒ³ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’å†ç”Ÿ
+=======
+        yield return new WaitForSeconds(2f); // ƒAƒjƒ[ƒVƒ‡ƒ“‚Ì‘Ò‹@ŠÔ
+
+        // ƒJƒbƒgƒCƒ“ƒAƒjƒ[ƒVƒ‡ƒ“‚ğÄ¶
+>>>>>>> Stashed changes
         cutInAnimator.SetTrigger("Show");
         yield return new WaitForSeconds(2f); // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®å¾…æ©Ÿæ™‚é–“
 
