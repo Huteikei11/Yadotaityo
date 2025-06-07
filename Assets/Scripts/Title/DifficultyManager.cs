@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class DifficultyManager : MonoBehaviour
 {
@@ -38,6 +39,17 @@ public class DifficultyManager : MonoBehaviour
     public void StartGame(string sceneName, int difficulty)
     {
         SetDifficulty(difficulty);
-        SceneManager.LoadScene(sceneName);
+        StartCoroutine(LoadSceneAsync(sceneName));
+
+    }
+
+    IEnumerator LoadSceneAsync(string sceneName)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
     }
 }

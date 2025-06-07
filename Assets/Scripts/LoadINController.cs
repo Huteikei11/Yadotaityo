@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class LoadINController : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
-        Animator animator = GetComponent<Animator>();
-        animator.Play("LoadIN"); // この時点でアニメーション再生を制御できる
+        StartCoroutine(PlayAnimationDelayed());
     }
 
-    // Update is called once per frame
+    private IEnumerator PlayAnimationDelayed()
+    {
+        yield return null; // 1フレーム待機
+        yield return null; // 1フレーム待機
+        yield return null; // 1フレーム待機
+        Animator animator = GetComponent<Animator>();
+        animator.Play("LoadIN");
+    }
+
     void Update()
     {
-        
+
     }
 }

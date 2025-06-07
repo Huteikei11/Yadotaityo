@@ -6,14 +6,14 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private Image whiteScreen; // ホワイトアウト・ホワイトイン用のイメージ
-    [SerializeField] private SpriteRenderer KoishiCutIn; // こいしのカットイン
-    [SerializeField] private Animator cutInAnimator; // カットインアニメーション用のアニメーター
+    [SerializeField] private Image whiteScreen; // ホワイトアウト�Eホワイトイン用のイメージ
+    [SerializeField] private SpriteRenderer KoishiCutIn; // こいし�EカチE��イン
+    [SerializeField] private Animator cutInAnimator; // カチE��インアニメーション用のアニメーター
     [SerializeField] private Animator mune; // 胸のアニメーター
     public List<RectTransform> uiScreens; // UI の RectTransform
-    public List<Transform> sprites; // スプライトの Transform
-    [SerializeField] private TextMeshProUGUI clearTimeText; // クリアタイムを表示するテキスト
-    [SerializeField] private List<GameObject> hidegameObjects; // ゲーム内のオブジェクトリスト
+    public List<Transform> sprites; // スプライト�E Transform
+    [SerializeField] private TextMeshProUGUI clearTimeText; // クリアタイムを表示するチE��スチE
+    [SerializeField] private List<GameObject> hidegameObjects; // ゲーム冁E�EオブジェクトリスチE
 
     [SerializeField] private TimerController timerController;
     [SerializeField] private HighScoreManager highScoreManager;
@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private RetryButton RetryButton;
     [SerializeField] private ExitButtonUI exitButtonUI;
 
-    [SerializeField] private Sprite[] semensprites; // スプライトを0,1,2の順に入れておく
+    [SerializeField] private Sprite[] semensprites; // スプライトを0,1,2の頁E��入れておく
     [SerializeField] private SpriteRenderer spriteRenderer;
 
     [SerializeField] private TextCut textCut;
@@ -37,21 +37,21 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        // コルーチンを呼び出して1フレーム遅延させる
+        // コルーチンを呼び出して1フレーム遁E��させめE
         StartCoroutine(DelayedLoadAnimation());
 
-        //タイマースタート
+        //タイマ�EスターチE
         difficulty = DifficultyManager.Instance != null ? DifficultyManager.Instance.GetDifficulty() : 0;
-        spriteRenderer.enabled = false; // 最初は非表示
+        spriteRenderer.enabled = false; // 最初�E非表示
         StartCoroutine(GameStart());
     }
 
     private IEnumerator DelayedLoadAnimation()
     {
-        // 1フレーム待機
+        // 1フレーム征E��E
         yield return null;
 
-        // loadNo の値に基づいてアニメーションを設定
+        // loadNo の値に基づぁE��アニメーションを設宁E
         loadNo = loadManager.Instance != null ? loadManager.Instance.GetLoadNo() : 0;
         switch (loadNo)
         {
@@ -65,15 +65,15 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator GameStart()
     {
-        //こいしのスタートのトランジションと文字
+        //こいし�Eスタート�Eトランジションと斁E��E
         yield return new WaitForSeconds(startTime);
         textCut.CutScene(textCut.Start, false);
         yield return new WaitForSeconds(1.5f);
-        //胸を開く
+        //胸を開ぁE
         mune.SetTrigger("Open");
 
         yield return new WaitForSeconds(1.5f);
-        timerController.StartTimer(); //ゲーム開始までの処理
+        timerController.StartTimer(); //ゲーム開始までの処琁E
         oppaiManager.StartOppai();
     }
 
@@ -87,10 +87,10 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator ResultSequence()
     {
-        // 1. ホワイトアウトとカットイン演出
+        // 1. ホワイトアウトとカチE��イン演�E
         yield return StartCoroutine(FinishDirection());
 
-        // 2. 画面スクロール演出
+        // 2. 画面スクロール演�E
         yield return StartCoroutine(Scroll());
 
         // 3. ゲーム画面のオブジェクトを非表示にする
@@ -107,10 +107,10 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator FinishDirection()
     {
-        //yield return new WaitForSeconds(2f); // アニメーションの待機時間
+        //yield return new WaitForSeconds(2f); // アニメーションの征E��時閁E
 
 
-        // ホワイトアウト開始
+        // ホワイトアウト開姁E
         whiteScreen.gameObject.SetActive(true);
         for (float t = 0; t < 1f; t += Time.deltaTime * 3)
         {
@@ -119,21 +119,16 @@ public class GameManager : MonoBehaviour
         }
         mune.SetBool("Finish", true);//胸を止める
 
-        // ホワイトイン開始（画面を白からフェードアウト）
+        // ホワイトイン開始（画面を白からフェードアウト！E
         for (float t = 1f; t > 0; t -= Time.deltaTime * 2)
         {
             whiteScreen.color = new Color(1, 1, 1, t);
             yield return null;
         }
-<<<<<<< Updated upstream
-        // カットインアニメーションを再生
-=======
-        yield return new WaitForSeconds(2f); // �A�j���[�V�����̑ҋ@����
 
         // �J�b�g�C���A�j���[�V�������Đ�
->>>>>>> Stashed changes
         cutInAnimator.SetTrigger("Show");
-        yield return new WaitForSeconds(2f); // アニメーションの待機時間
+        yield return new WaitForSeconds(2f); // アニメーションの征E��時閁E
 
 
         for (float t = 0; t < 1f; t += Time.deltaTime * 3)
@@ -142,9 +137,9 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
-        ShowSprite(difficulty);//精液がかかっている
+        ShowSprite(difficulty);//精液がかかってぁE��
         cutInAnimator.SetTrigger("End");
-        // ホワイトイン開始（画面を白からフェードアウト）
+        // ホワイトイン開始（画面を白からフェードアウト！E
         for (float t = 1f; t > 0; t -= Time.deltaTime * 2)
         {
             whiteScreen.color = new Color(1, 1, 1, t);
@@ -155,7 +150,7 @@ public class GameManager : MonoBehaviour
 
 
         whiteScreen.gameObject.SetActive(false);
-        yield return new WaitForSeconds(1f); // アニメーションの待機時間
+        yield return new WaitForSeconds(1f); // アニメーションの征E��時閁E
     }
 
     private void HideGameObjects()
@@ -168,23 +163,23 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator Scroll()
     {
-        float slideDistanceUI = 550f; // UIのスライド距離（anchoredPosition 用）
-        float slideDistanceSprite = 1.61f; // スプライトのスライド距離（ワールド座標）
-        float duration = 1.5f; // スライド時間
+        float slideDistanceUI = 550f; // UIのスライド距離�E�EnchoredPosition 用�E�E
+        float slideDistanceSprite = 1.61f; // スプライト�Eスライド距離�E�ワールド座標！E
+        float duration = 1.5f; // スライド時閁E
         float time = 0;
         List<Vector2> startUIPositions = new List<Vector2>();
         List<Vector2> endUIPositions = new List<Vector2>();
         List<Vector3> startSpritePositions = new List<Vector3>();
         List<Vector3> endSpritePositions = new List<Vector3>();
 
-        // UI の開始位置と終了位置を設定
+        // UI の開始位置と終亁E��置を設宁E
         foreach (var screen in uiScreens)
         {
             startUIPositions.Add(screen.anchoredPosition);
             endUIPositions.Add(screen.anchoredPosition + (Vector2.left * slideDistanceUI));
         }
 
-        // スプライトの開始位置と終了位置を設定
+        // スプライト�E開始位置と終亁E��置を設宁E
         foreach (var sprite in sprites)
         {
             startSpritePositions.Add(sprite.position);
@@ -196,13 +191,13 @@ public class GameManager : MonoBehaviour
             time += Time.deltaTime;
             float t = time / duration;
 
-            // UI をスライド
+            // UI をスライチE
             for (int i = 0; i < uiScreens.Count; i++)
             {
                 uiScreens[i].anchoredPosition = Vector2.Lerp(startUIPositions[i], endUIPositions[i], t);
             }
 
-            // スプライトをスライド
+            // スプライトをスライチE
             for (int i = 0; i < sprites.Count; i++)
             {
                 sprites[i].position = Vector3.Lerp(startSpritePositions[i], endSpritePositions[i], t);
@@ -225,14 +220,14 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator ClearTime()
     {
-        clearTimeText.text = ""; // 初期化
+        clearTimeText.text = ""; // 初期匁E
         string timeStr = timerController.GetTimeString();
 
-        // 1文字ずつ表示する
+        // 1斁E��ずつ表示する
         foreach (char c in timeStr)
         {
             clearTimeText.text += c;
-            yield return new WaitForSeconds(0.1f); // 文字の表示間隔
+            yield return new WaitForSeconds(0.1f); // 斁E���E表示間隔
         }
     }
 
@@ -245,7 +240,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("不正なモード番号です: " + mode);
+            Debug.LogWarning("不正なモード番号でぁE " + mode);
         }
     }
 }
