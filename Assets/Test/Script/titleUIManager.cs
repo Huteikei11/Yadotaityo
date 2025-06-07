@@ -35,6 +35,7 @@ public class titleUIManager : MonoBehaviour
     }
     private IEnumerator loadIn(int difficult)
     {
+
         screen.SetTrigger("loadInTrigger");
         yield return null;//animator‚ª”½‰f‚³‚ê‚é‚Ü‚Å‚ÌŠÉÕŠÔ
         yield return new WaitForSeconds(screen.GetCurrentAnimatorStateInfo(0).length);
